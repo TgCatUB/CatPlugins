@@ -13,7 +13,8 @@ import requests
 from userbot import catub
 
 from userbot.helpers.functions import age_verification
-from userbot import edit_delete, edit_or_reply, reply_id
+from userbot.core.managers import edit_delete, edit_or_reply
+from userbot.helpers import  reply_id
 from .helpers import nsfw as useless
 
 plugin_category = "useless"
