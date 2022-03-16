@@ -11,10 +11,13 @@ from fake_useragent import UserAgent
 from PIL import Image
 from simplejson.errors import JSONDecodeError
 
-from ..core.managers import edit_delete, edit_or_reply
-from ..helpers.functions import age_verification
-from ..helpers.utils import _catutils, reply_id
-from . import catub, useless
+from userbot import catub
+
+from userbot.helpers.functions import age_verification
+from userbot.core.managers import edit_delete, edit_or_reply
+from userbot.helpers.utils import _catutils, reply_id
+from .helpers import nsfw as useless
+
 
 plugin_category = "useless"
 
