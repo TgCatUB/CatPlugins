@@ -24,7 +24,7 @@ plugin_category = "extra"
 )
 async def abusing(abused):
     "random abuse string"
-    flag = await nsfw.importent(event)
+    flag = await nsfw.importent(abused)
     if flag:
         return
     reply_text = random.choice(strings.ABUSE_STRINGS)
@@ -41,7 +41,7 @@ async def abusing(abused):
 )
 async def fuckedd(abusehard):
     "random gali string"
-    flag = await nsfw.importent(event)
+    flag = await nsfw.importent(abusehard)
     if flag:
         return
     reply_text = random.choice(strings.ABUSEHARD_STRING)
@@ -58,7 +58,7 @@ async def fuckedd(abusehard):
 )
 async def metoo(e):
     "random gali string"
-    flag = await nsfw.importent(event)
+    flag = await nsfw.importent(e)
     if flag:
         return
     txt = random.choice(strings.RENDISTR)
@@ -75,7 +75,7 @@ async def metoo(e):
 )
 async def chutiya(fuks):
     "random gali string"
-    flag = await nsfw.importent(event)
+    flag = await nsfw.importent(fuks)
     if flag:
         return
     reply_text = random.choice(strings.CHU_STRINGS)
@@ -92,7 +92,7 @@ async def chutiya(fuks):
 )
 async def thanos(thanos):
     "random gali string"
-    flag = await nsfw.importent(event)
+    flag = await nsfw.importent(thanos)
     if flag:
         return
     reply_text = random.choice(strings.THANOS_STRINGS)

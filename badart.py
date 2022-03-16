@@ -6,8 +6,8 @@ Plugin for CatUserbot
 
 import asyncio
 from userbot.core.managers import edit_or_reply
-from userbot import catub, mention
-
+from userbot import catub
+from userbot.plugins import mention
 
 plugin_category = "fun"
 
@@ -393,7 +393,7 @@ async def kakashi(dicksay):
 
 
 @catub.cat_cmd(
-    pattern=r"^\.(?:penis|dick)\s?(.)?",
+    pattern="(?:penis|dick)(?:\s|$)([\s\S]*)",
     command=("penis|dick", plugin_category),
     info={
         "header": "bad art, try yourself ",
