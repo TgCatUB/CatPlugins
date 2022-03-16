@@ -118,8 +118,8 @@ def nsfw(catagory):
     catagory.sort(key=str.casefold)
     horny = "**Catagory :** "
     for i in catagory:
-        horny += f" `{i.lower()}` ||"
+        horny += f" `{i.lower()}` -"
     return horny
 
 
-API = "https://weaverbottest.herokuapp.com/gimme"
+API = "https://catmemeapi.herokuapp.com/gimme"
