@@ -5,12 +5,14 @@ plugin for Cat_Userbot
 You remove this, you gay.
 """
 import os
-
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-from ..core.managers import edit_delete, edit_or_reply
-from ..helpers.functions import clippy
-from . import _cattools, catub, convert_toimage, mention, reply_id
+from userbot import catub
+from userbot.plugins import mention
+from userbot.helpers.functions import clippy, convert_toimage
+from userbot.core.managers import edit_delete, edit_or_reply
+from userbot.helpers.utils import reply_id, media_to_pic
+
 
 plugin_category = "extra"
 
@@ -35,7 +37,7 @@ async def bad(event):
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
     output_file = os.path.join("./temp", "jisan.jpg")
-    output = await _cattools.media_to_pic(event, reply_message)
+    output = await media_to_pic(event, reply_message)
     outputt = convert_toimage(output[1], filename="./temp/jisan.jpg")
     kakashi = await edit_or_reply(event, "```Wait making ASCII...```")
     async with event.client.conversation("@asciiart_bot") as conv:
@@ -85,7 +87,7 @@ async def pussy(event):
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
     output_file = os.path.join("./temp", "jisan.jpg")
-    output = await _cattools.media_to_pic(event, reply_message)
+    output = await media_to_pic(event, reply_message)
     outputt = convert_toimage(output[1], filename="./temp/jisan.jpg")
     kakashi = await edit_or_reply(event, "```Processing....```")
     async with event.client.conversation("@Lines50Bot") as conv:
@@ -128,7 +130,7 @@ async def cat(event):
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
     output_file = os.path.join("./temp", "jisan.jpg")
-    output = await _cattools.media_to_pic(event, reply_message)
+    output = await media_to_pic(event, reply_message)
     outputt = convert_toimage(output[1], filename="./temp/jisan.jpg")
     await cat.delete()
     await clippy(event.client, output_file, event.chat_id, c_id)
