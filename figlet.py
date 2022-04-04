@@ -1,7 +1,7 @@
 import pyfiglet
 
-from ..helpers.utils import _format
-from . import _format, catub, deEmojify, edit_delete, edit_or_reply
+from userbot.helpers.utils import _format
+from userbot.plugins import _format, catub, deEmojify, edit_delete, edit_or_reply
 
 plugin_category = "extra"
 

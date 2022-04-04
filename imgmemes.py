@@ -6,9 +6,9 @@ import re
 
 from userbot import catub
 
-from ..core.managers import edit_delete, edit_or_reply
-from ..helpers.utils import reply_id
-from . import (
+from userbot.core.managers import edit_delete, edit_or_reply
+from userbot.helpers.utils import reply_id
+from userbot.plugins import (
     changemymind,
     deEmojify,
     fakegs,

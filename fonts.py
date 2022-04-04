@@ -2,8 +2,8 @@ import random
 
 from userbot import catub
 
-from ..core.managers import edit_or_reply
-from . import fonts
+from userbot.core.managers import edit_or_reply
+from userbot.plugins import fonts
 
 plugin_category = "extra"
 
