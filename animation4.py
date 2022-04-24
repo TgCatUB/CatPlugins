@@ -69,6 +69,70 @@ async def _(event):
 
 
 @catub.cat_cmd(
+    pattern="uff$",
+    command=("uff", plugin_category),
+    info={
+        "header": "Fun animation try yourself to know more",
+        "usage": "{tr}uff",
+    },
+)
+async def uff(event):
+    "animation command"
+    animation_interval = 0.7
+    animation_ttl = range(13)
+    event = await edit_or_reply(event, "Areeeh...")
+    animation_chars = [
+        "U",
+        "Uf",
+        "Uff",
+        "Ufffff",
+        "Uffffff",
+        "Ufffffff",
+        "Uffffffff",
+        "Ufffffffff",
+        "Uffffffffff",
+        "Ufffffffffff",
+        "Uffffffffffff",
+        "Ufffffffffffff",
+        "Uffffffffffffff",
+    ]
+    for i in animation_ttl:
+        await asyncio.sleep(animation_interval)
+        await event.edit(animation_chars[i % 13])
+
+
+@catub.cat_cmd(
+    pattern="hmm$",
+    command=("hmm", plugin_category),
+    info={
+        "header": "Fun animation try yourself to know more",
+        "usage": "{tr}hmm",
+    },
+)
+async def hmm(event):
+    "animation command"
+    animation_interval = 0.7
+    animation_ttl = range(11)
+    event = await edit_or_reply(event, "Hm")
+    animation_chars = [
+        "Hmm",
+        "Hmmm",
+        "Hmmmm",
+        "Hmmmmm",
+        "Hmmmmmm",
+        "Hmmmmmmm",
+        "Hmmmmmmmm",
+        "Hmmmmmmmmm",
+        "Hmmmmmmmmmm",
+        "Hmmmmmmmmmmm",
+        "Hmmmmmmmmmmmm",
+    ]
+    for i in animation_ttl:
+        await asyncio.sleep(animation_interval)
+        await event.edit(animation_chars[i % 11])
+
+
+@catub.cat_cmd(
     pattern="thinking$",
     command=("thinking", plugin_category),
     info={
