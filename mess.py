@@ -64,7 +64,7 @@ async def cat(event):
         ],
     },
 )
-async def some(event):
+async def kiss(event):
     """Its useless for single like you. Get a lover first"""
     inpt = event.pattern_match.group(1)
     reply_to_id = await reply_id(event)
@@ -79,7 +79,7 @@ async def some(event):
     try:
         await event.client(
             functions.channels.GetParticipantRequest(
-                channel=chat, participant=event.from_id.user_id
+                channel=chat, participant=catub.uid
             )
         )
     except UserNotParticipantError:
