@@ -3,14 +3,13 @@ from os import remove
 from random import choice
 from urllib import parse
 
-import nekos
 import requests
 from PIL import Image
 from telethon import functions, types, utils
 
 from userbot import catub
 
-from userbot.helpers import reply_id
+from userbot.helpers import reply_id,edit_or_reply
 
 plugin_category = "extra"
 
@@ -26,20 +25,24 @@ PAT_IMAGE = "pat.webp"
         "usage": "{tr}cat",
     },
 )
-async def _(event):
+async def cat(event):
     "To get random cat stickers."
     await event.delete()
     reply_to_id = await reply_id(event)
-    with open("temp.png", "wb") as f:
-        f.write(requests.get(nekos.cat()).content)
-    img = Image.open("temp.png")
-    img.save("temp.webp", "webp")
-    img.seek(0)
-    await event.client.send_file(
-        event.chat_id, open("temp.webp", "rb"), reply_to=reply_to_id
-    )
-    remove("temp.webp")
-
+    cat = requests.get("https://nekos.life/api/v2/img/meow").json()
+    try: 
+        with open("temp.png", "wb") as f:
+            f.write(requests.get(cat['url']).content)
+        img = Image.open("temp.png")
+        img.save("temp.webp", "webp")
+        img.seek(0)
+        await event.delete()
+        await event.client.send_file(
+            event.chat_id, open("temp.webp", "rb"), reply_to=reply_to_id
+        )
+        remove("temp.webp")
+    except KeyError:
+        await edit_or_reply(event,"```Can't Find any cat...```")
 
 # credit to @r4v4n4
 
@@ -52,7 +55,7 @@ async def _(event):
         "usage": "{tr}dab",
     },
 )
-async def _(event):
+async def dab(event):
     "To get random dabbing pose stickers."
     reply_to_id = await reply_id(event)
     blacklist = {
@@ -95,7 +98,7 @@ async def _(event):
         "usage": "{tr}brain",
     },
 )
-async def handler(event):
+async def brain(event):
     "To get random brain stickers."
     reply_to_id = await reply_id(event)
     blacklist = {}
@@ -128,7 +131,7 @@ async def handler(event):
         "usage": "{tr}pat",
     },
 )
-async def lastfm(event):
+async def pat(event):
     "To get random pat stickers."
     await event.delete()
     reply_to_id = await reply_id(event)

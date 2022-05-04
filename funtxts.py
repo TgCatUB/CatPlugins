@@ -1,7 +1,6 @@
-import nekos
 
 from userbot import catub
-
+import requests
 from userbot.core.managers import edit_or_reply
 
 plugin_category = "fun"
@@ -17,8 +16,8 @@ plugin_category = "fun"
 )
 async def hmm(cat):
     "Some random cat facial text art"
-    reactcat = nekos.textcat()
-    await edit_or_reply(cat, reactcat)
+    reactcat = requests.get("https://nekos.life/api/v2/cat").json()
+    await edit_or_reply(cat, reactcat['cat'])
 
 
 @catub.cat_cmd(
@@ -31,8 +30,8 @@ async def hmm(cat):
 )
 async def hmm(cat):
     "Some random Funny questions"
-    whycat = nekos.why()
-    await edit_or_reply(cat, whycat)
+    whycat = requests.get("https://nekos.life/api/v2/why").json()
+    await edit_or_reply(cat, whycat['why'])
 
 
 @catub.cat_cmd(
@@ -45,5 +44,5 @@ async def hmm(cat):
 )
 async def hmm(cat):
     "Some random facts"
-    factcat = nekos.fact()
-    await edit_or_reply(cat, factcat)
+    factcat = requests.get("https://nekos.life/api/v2/fact").json()
+    await edit_or_reply(cat, factcat['fact'])
