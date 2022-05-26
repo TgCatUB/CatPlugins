@@ -5,7 +5,6 @@ Userbot plugin for CatUserbot
 """
 
 from userbot import catub
-
 from userbot.core.managers import edit_or_reply
 from userbot.helpers import fonts as emojify
 

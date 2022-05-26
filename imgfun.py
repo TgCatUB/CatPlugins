@@ -4,9 +4,7 @@ import os
 from io import BytesIO
 
 from PIL import Image, ImageFilter, ImageOps
-
 from userbot import catub
-
 from userbot.core.managers import edit_delete, edit_or_reply
 from userbot.helpers import media_type
 from userbot.helpers.functions import dotify
@@ -37,7 +35,7 @@ plugin_category = "fun"
         ],
     },
 )
-async def imirror(event):    # sourcery no-metrics
+async def imirror(event):  # sourcery no-metrics
     "imgae refelection fun."
     reply = await event.get_reply_message()
     mediatype = media_type(reply)

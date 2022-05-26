@@ -2,7 +2,6 @@
 import random
 
 from userbot import catub
-
 from userbot.core.logger import logging
 from userbot.core.managers import edit_delete, edit_or_reply
 from userbot.helpers import catmemes

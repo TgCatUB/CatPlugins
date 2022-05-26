@@ -1,7 +1,6 @@
 import asyncio
 
 from userbot import catub
-
 from userbot.core.managers import edit_or_reply
 
 plugin_category = "fun"

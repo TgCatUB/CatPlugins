@@ -2,7 +2,6 @@ import random
 import re
 
 from userbot import catub
-
 from userbot.core.managers import edit_or_reply
 from userbot.plugins import fonts
 

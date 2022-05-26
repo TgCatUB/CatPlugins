@@ -9,9 +9,7 @@ import re
 import requests
 from cowpy import cow
 from telethon.tl.types import ChannelParticipantsAdmins
-
 from userbot import catub
-
 from userbot.core.managers import edit_delete, edit_or_reply
 from userbot.helpers import catmemes, get_user_from_event
 from userbot.helpers.utils import _catutils, parse_pre

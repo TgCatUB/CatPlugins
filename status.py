@@ -2,7 +2,6 @@ import os
 import urllib
 
 from telethon.tl import functions
-
 from userbot import catub
 from userbot.core.managers import edit_delete, edit_or_reply
 from userbot.sql_helper.globals import addgvar, gvarstatus

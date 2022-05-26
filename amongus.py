@@ -8,9 +8,7 @@ from textwrap import wrap
 from PIL import Image, ImageDraw, ImageFont
 from requests import get
 from telethon.utils import get_display_name
-
 from userbot import catub
-
 from userbot.Config import Config
 from userbot.core.managers import edit_or_reply
 from userbot.helpers.utils import get_user_from_event, reply_id

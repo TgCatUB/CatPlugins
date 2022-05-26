@@ -4,7 +4,6 @@ plugin for Cat_Userbot
 """
 
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-
 from userbot.plugins import catub, edit_or_reply, reply_id
 
 plugin_category = "extra"

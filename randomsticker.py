@@ -6,10 +6,8 @@ from urllib import parse
 import requests
 from PIL import Image
 from telethon import functions, types, utils
-
 from userbot import catub
-
-from userbot.helpers import reply_id,edit_or_reply
+from userbot.helpers import edit_or_reply, reply_id
 
 plugin_category = "extra"
 
@@ -30,9 +28,9 @@ async def cat(event):
     await event.delete()
     reply_to_id = await reply_id(event)
     cat = requests.get("https://nekos.life/api/v2/img/meow").json()
-    try: 
+    try:
         with open("temp.png", "wb") as f:
-            f.write(requests.get(cat['url']).content)
+            f.write(requests.get(cat["url"]).content)
         img = Image.open("temp.png")
         img.save("temp.webp", "webp")
         img.seek(0)
@@ -42,7 +40,8 @@ async def cat(event):
         )
         remove("temp.webp")
     except KeyError:
-        await edit_or_reply(event,"```Can't Find any cat...```")
+        await edit_or_reply(event, "```Can't Find any cat...```")
+
 
 # credit to @r4v4n4
 

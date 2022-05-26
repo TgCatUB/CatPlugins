@@ -1,7 +1,7 @@
 # corona virus stats for catuserbot
-from covid import Covid
-
 from userbot.plugins import catub, covidindia, edit_delete, edit_or_reply
+
+from covid import Covid
 
 plugin_category = "extra"
 
