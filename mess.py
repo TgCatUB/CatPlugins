@@ -14,10 +14,12 @@ from userbot.core.managers import edit_delete, edit_or_reply
 from userbot.helpers import media_type
 from userbot.helpers.utils import _catutils, reply_id
 from userbot import catub
+import contextlib
 
 plugin_category = "useless"
 
 LOGS = logging.getLogger(__name__)
+
 
 
 @catub.cat_cmd(
@@ -68,7 +70,7 @@ async def kiss(event):
     """Its useless for single like you. Get a lover first"""
     inpt = event.pattern_match.group(1)
     reply_to_id = await reply_id(event)
-    count = 1 if not inpt else int(inpt)
+    count = int(inpt) if inpt else 1
     if count < 0 and count > 20:
         await edit_delete(event, "`Give value in range 1-20`")
     res = base64.b64decode(
@@ -103,12 +105,10 @@ async def kiss(event):
     async for x in event.client.iter_messages(
         chat, min_id=start, max_id=end, reverse=True
     ):
-        try:
+        with contextlib.suppress(AttributeError):
             if x.media and x.media.document.mime_type == "video/mp4":
                 link = f"{res.split('j')[0]}{chat}/{x.id}"
                 kiss.append(link)
-        except AttributeError:
-            pass
     kisss = random.sample(kiss, count)
     for i in kisss:
         nood = await event.client.send_file(event.chat_id, i, reply_to=reply_to_id)

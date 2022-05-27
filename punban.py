@@ -16,12 +16,13 @@ from userbot.helpers.functions import age_verification
 from userbot.core.managers import edit_delete, edit_or_reply
 from userbot.helpers.utils import _catutils, reply_id
 from .helpers import nsfw as useless
-
+import contextlib
 
 API = useless.API
 horny = useless.nsfw(useless.pawn)
 
 plugin_category = "useless"
+
 
 
 @catub.cat_cmd(
@@ -37,7 +38,7 @@ plugin_category = "useless"
         "options": horny,
     },
 )
-async def very(event):
+async def very(event):  # sourcery skip: low-code-quality
     """Random porn post"""
     reply_to = await reply_id(event)
     sub_r = event.pattern_match.group(1)
@@ -68,7 +69,7 @@ async def very(event):
         if "https://i.imgur.com" in media_url and media_url.endswith(".gifv"):
             media_url = media_url.replace(".gifv", ".mp4")
         elif "https://redgifs.com/watch" in media_url:
-            try:
+            with contextlib.suppress(IndexError):
                 source = requests.get(media_url)
                 soup = BeautifulSoup(source.text, "lxml")
                 links = [
@@ -78,8 +79,6 @@ async def very(event):
                     media_url = links[1]
                 except IndexError:
                     media_url = links[0]
-            except IndexError:
-                pass
         try:
             sandy = await event.client.send_file(
                 event.chat_id,
@@ -121,7 +120,7 @@ async def very(event):
         "options": horny,
     },
 )
-async def bad(event):
+async def bad(event):  # sourcery skip: low-code-quality
     """Download porn in bulk"""
     reply_to = await reply_id(event)
     intxt = event.pattern_match.group(1)
@@ -149,12 +148,9 @@ async def bad(event):
     postlink = []
     media_url = []
     try:
-        for x in r["memes"]:
-            postlink.append(x["postLink"])
-        for x in r["memes"]:
-            title.append(x["title"])
-        for x in r["memes"]:
-            media_url.append(x["url"])
+        postlink.extend(x["postLink"] for x in r["memes"])
+        title.extend(x["title"] for x in r["memes"])
+        media_url.extend(x["url"] for x in r["memes"])
     except KeyError:
         return await edit_delete(
             event, "**(ノಠ益ಠ)ノ  Tou sure this a vaid catagory/subreddit ??**", time=20
@@ -242,10 +238,8 @@ async def pussy(event):
     title = []
     media_url = []
     try:
-        for x in r["memes"]:
-            title.append(x["title"])
-        for x in r["memes"]:
-            media_url.append(x["url"])
+        title.extend(x["title"] for x in r["memes"])
+        media_url.extend(x["url"] for x in r["memes"])
     except KeyError:
         return await edit_delete(
             event, "**(ノಠ益ಠ)ノ  Tou sure this a vaid catagory/subreddit ??**", time=20
@@ -354,7 +348,7 @@ async def cat(event):
         "examples": "{tr}linkdl https://redgifs.com/watch/virtuousgorgeousindianspinyloach https://i.imgur.com/3Ffkon9.gifv",
     },
 )
-async def wants_ur_noods(event):
+async def wants_ur_noods(event):  # sourcery skip: low-code-quality
     """Download ~~porns~~ *posts from link"""
     reply_to = await reply_id(event)
     intxt = event.pattern_match.group(1)
