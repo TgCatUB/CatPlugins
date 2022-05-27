@@ -35,7 +35,8 @@ plugin_category = "fun"
         ],
     },
 )
-async def imirror(event):  # sourcery no-metrics
+async def imirror(event):    # sourcery no-metrics
+    # sourcery skip: low-code-quality
     "imgae refelection fun."
     reply = await event.get_reply_message()
     mediatype = media_type(reply)
