@@ -8,8 +8,8 @@ import random
 
 from userbot import catub
 from userbot.core.managers import edit_or_reply
-from .helpers import strings,nsfw
 
+from .helpers import nsfw, strings
 
 plugin_category = "extra"
 
@@ -249,6 +249,7 @@ async def _(event):
         await asyncio.sleep(animation_interval)
         await catevent.edit(animation_chars[i % 4])
 
+
 @catub.cat_cmd(
     pattern="sex$",
     command=("sex", plugin_category),
@@ -307,7 +308,7 @@ async def cat(event):
     flag = await nsfw.importent(event)
     if flag:
         return
-    await edit_or_reply(event,strings.gali1)
+    await edit_or_reply(event, strings.gali1)
 
 
 @catub.cat_cmd(
@@ -323,7 +324,7 @@ async def cat(event):
     flag = await nsfw.importent(event)
     if flag:
         return
-    await edit_or_reply(event,strings.gali2)
+    await edit_or_reply(event, strings.gali2)
 
 
 @catub.cat_cmd(
@@ -339,4 +340,4 @@ async def cat(event):
     flag = await nsfw.importent(event)
     if flag:
         return
-    await edit_or_reply(event,strings.gali3)
+    await edit_or_reply(event, strings.gali3)

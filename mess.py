@@ -1,25 +1,22 @@
 # Created by @Jisan7509
 
 import base64
+import contextlib
 import logging
 import random
 
-import requests
 from telethon import functions, types
 from telethon.errors.rpcerrorlist import UserNotParticipantError, YouBlockedUserError
 from telethon.tl.functions.channels import GetFullChannelRequest
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
-
+from userbot import catub
 from userbot.core.managers import edit_delete, edit_or_reply
 from userbot.helpers import media_type
 from userbot.helpers.utils import _catutils, reply_id
-from userbot import catub
-import contextlib
 
 plugin_category = "useless"
 
 LOGS = logging.getLogger(__name__)
-
 
 
 @catub.cat_cmd(

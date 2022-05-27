@@ -5,8 +5,9 @@ Plugin for CatUserbot
 """
 
 import asyncio
-from userbot.core.managers import edit_or_reply
+
 from userbot import catub
+from userbot.core.managers import edit_or_reply
 from userbot.plugins import mention
 
 plugin_category = "fun"

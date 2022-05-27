@@ -9,20 +9,19 @@ import requests
 from fake_useragent import UserAgent
 from PIL import Image
 from simplejson.errors import JSONDecodeError
-
 from userbot import catub
-
-from userbot.helpers.functions import age_verification
 from userbot.core.managers import edit_delete, edit_or_reply
+from userbot.helpers.functions import age_verification
 from userbot.helpers.utils import _catutils, reply_id
-from .helpers import nsfw as useless
 
+from .helpers import nsfw as useless
 
 plugin_category = "useless"
 
 
 def user_agent():
     return UserAgent().random
+
 
 @catub.cat_cmd(
     pattern="nn ?([\s\S]*)",
@@ -85,7 +84,6 @@ async def dva(event):
         return await edit_delete(event, "`uuuf.. No URL found from the API`")
     await event.delete()
     await event.client.send_file(event.chat_id, file=url, reply_to=reply_to)
-    
 
 
 @catub.cat_cmd(
