@@ -136,7 +136,7 @@ async def weebify(event):
     if not args:
         await edit_or_reply(event, "`What I am Supposed to Weebify `")
         return
-    string = "  ".join(args).lower()
+    string = "".join(args).lower()
     for normiecharacter in string:
         if normiecharacter in fonts.normiefont:
             weebycharacter = fonts.weebyfont[fonts.normiefont.index(normiecharacter)]
@@ -165,7 +165,7 @@ async def stylish_generator(event):
     if not args:
         await edit_or_reply(event, "What I am Supposed to change give text")
         return
-    string = "  ".join(args).lower()
+    string = "".join(args).lower()
     for upsidecharacter in string:
         if upsidecharacter in fonts.upsidefont:
             downsidecharacter = fonts.downsidefont[
@@ -196,7 +196,7 @@ async def stylish_generator(event):
     if not args:
         await edit_or_reply(event, "What I am Supposed to change give text")
         return
-    string = "  ".join(args).lower()
+    string = "".join(args).lower()
     for normaltextcharacter in string:
         if normaltextcharacter in fonts.normaltext:
             subscriptcharacter = fonts.subscriptfont[
@@ -227,7 +227,7 @@ async def stylish_generator(event):
     if not args:
         await edit_or_reply(event, "What I am Supposed to change give text")
         return
-    string = "  ".join(args).lower()
+    string = "".join(args).lower()
     for normaltextcharacter in string:
         if normaltextcharacter in fonts.normaltext:
             superscriptcharacter = fonts.superscriptfont[
