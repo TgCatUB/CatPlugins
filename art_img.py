@@ -31,7 +31,7 @@ plugin_category = "extra"
 async def bad(event):
     "Make a media to ascii art"
     reply_message = await event.get_reply_message()
-    if not event.reply_to_msg_id or not reply_message.media:
+    if not (reply_message and reply_message.media):
         return await edit_delete(event, "```Reply to a media file...```")
     c_id = await reply_id(event)
     chat = "@asciiart_bot"
@@ -76,7 +76,7 @@ async def bad(event):
 async def pussy(event):
     "Make a media to line image"
     reply_message = await event.get_reply_message()
-    if not event.reply_to_msg_id or not reply_message.media:
+    if not (reply_message and reply_message.media):
         return await edit_delete(event, "```Reply to a media file...```")
     c_id = await reply_id(event)
     chat = "@Lines50Bot"
@@ -121,7 +121,7 @@ async def pussy(event):
 async def cat(event):
     "Make a media to clippy sticker"
     reply_message = await event.get_reply_message()
-    if not event.reply_to_msg_id or not reply_message.media:
+    if not (reply_message and reply_message.media):
         return await edit_delete(event, "```Reply to a media file...```")
     cat = await edit_or_reply(event, "```Processing...```")
     c_id = await reply_id(event)
