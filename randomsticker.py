@@ -7,7 +7,8 @@ import requests
 from PIL import Image
 from telethon import functions, types, utils
 from userbot import catub
-from userbot.helpers import edit_or_reply, reply_id
+from userbot.core.managers import edit_or_reply
+from userbot.helpers import reply_id
 
 plugin_category = "extra"
 

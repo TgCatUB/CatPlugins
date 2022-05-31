@@ -21,7 +21,7 @@ plugin_category = "extra"
         "usage": "{tr}mask",
     },
 )
-async def mask(event):
+async def _(event):
     "Hazmat suit maker"
     reply_message = await event.get_reply_message()
     if not (reply_message and reply_message.media):
@@ -60,7 +60,7 @@ async def mask(event):
         "usage": "{tr}awooify",
     },
 )
-async def awooify(event):
+async def _(event):
     "replied Image will be face of other image"
     replied = await event.get_reply_message()
     if not (replied and replied.media):
@@ -97,7 +97,7 @@ async def awooify(event):
         "usage": "{tr}lolice",
     },
 )
-async def lolice(event):
+async def _(event):
     "replied Image will be face of other image"
     replied = await event.get_reply_message()
     if not (replied and replied.media):
@@ -134,7 +134,7 @@ async def lolice(event):
         "usage": "{tr}bun",
     },
 )
-async def bun(event):
+async def _(event):
     "replied Image will be face of other image"
     replied = await event.get_reply_message()
     if not (replied and replied.media):
@@ -171,7 +171,7 @@ async def bun(event):
         "usage": "{tr}iphx",
     },
 )
-async def iphx(event):
+async def _(event):
     "replied image as iphone x wallpaper."
     replied = await event.get_reply_message()
     if not (replied and replied.media):
