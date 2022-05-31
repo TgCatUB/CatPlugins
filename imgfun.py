@@ -9,7 +9,6 @@ from userbot.core.managers import edit_delete, edit_or_reply
 from userbot.helpers import media_type
 from userbot.helpers.functions import dotify
 
-
 plugin_category = "fun"
 
 
