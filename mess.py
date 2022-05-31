@@ -46,7 +46,7 @@ async def cat(event):
             return
         await cat.delete()
         badcat = await event.client.send_file(event.chat_id, media, reply_to=reply)
-        out = media_type(media)
+        out = await media_type(media)
         if out in ["Gif", "Video", "Sticker"]:
             await _catutils.unsavegif(event, badcat)
     await event.client.delete_messages(conv.chat_id, [msg.id, media.id])
