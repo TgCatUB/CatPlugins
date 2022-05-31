@@ -39,7 +39,7 @@ async def imirror(event):  # sourcery no-metrics
     # sourcery skip: low-code-quality
     "imgae refelection fun."
     reply = await event.get_reply_message()
-    mediatype = media_type(reply)
+    mediatype = await media_type(reply)
     if not reply or not mediatype or mediatype not in ["Photo", "Sticker"]:
         return await edit_delete(event, "__Reply to photo or sticker to make mirror.__")
     catevent = await event.edit("__Reflecting the image....__")
@@ -116,7 +116,7 @@ async def imirror(event):  # sourcery no-metrics
 async def irotate(event):
     "To convert replied image or sticker to gif"
     reply = await event.get_reply_message()
-    mediatype = media_type(reply)
+    mediatype = await media_type(reply)
     if not reply or not mediatype or mediatype not in ["Photo", "Sticker"]:
         return await edit_delete(
             event, "__Reply to photo or sticker to rotate it with given angle.__"
@@ -162,7 +162,7 @@ async def irotate(event):
 async def iresize(event):
     "To resize the replied image/sticker"
     reply = await event.get_reply_message()
-    mediatype = media_type(reply)
+    mediatype = await media_type(reply)
     if not reply or not mediatype or mediatype not in ["Photo", "Sticker"]:
         return await edit_delete(event, "__Reply to photo or sticker to resize it.__")
     if mediatype == "Sticker" and reply.document.mime_type == "application/i-tgsticker":
@@ -218,7 +218,7 @@ async def iresize(event):
 async def square_cmd(event):
     "Converts replied image to square image."
     reply = await event.get_reply_message()
-    mediatype = media_type(reply)
+    mediatype = await media_type(reply)
     if not reply or not mediatype or mediatype not in ["Photo"]:
         return await edit_delete(event, "__Reply to photo to make it square image.__")
     catevent = await event.edit("__Adding borders to make it square....__")
@@ -260,7 +260,7 @@ async def square_cmd(event):
 async def pic_gifcmd(event):
     "To convert image into doted image"
     reply = await event.get_reply_message()
-    mediatype = media_type(reply)
+    mediatype = await media_type(reply)
     if not reply or not mediatype or mediatype not in ["Photo", "Sticker"]:
         return await edit_delete(
             event, "__Reply to photo or sticker to make it doted image.__"
