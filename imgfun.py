@@ -50,7 +50,9 @@ async def imirror(event):  # sourcery no-metrics
         filename = "catuserbot.jpg"
         f_format = "jpeg"
     try:
-        imag = await Convert.to_image(catevent, reply,dirct="./temp", file="imirror.png", noedits=True)
+        imag = await Convert.to_image(
+            catevent, reply, dirct="./temp", file="imirror.png", noedits=True
+        )
         if imag[1] is None:
             return await edit_delete(
                 imag[0], "__Unable to extract image from the replied message.__"
@@ -127,7 +129,9 @@ async def irotate(event):
         )
     args = event.pattern_match.group(1)
     catevent = await edit_or_reply(event, "__Rotating the replied media...__")
-    imag = await Convert.to_image(catevent, reply, dirct="./temp", file="irotate.png", noedits=True)
+    imag = await Convert.to_image(
+        catevent, reply, dirct="./temp", file="irotate.png", noedits=True
+    )
     if imag[1] is None:
         return await edit_delete(
             imag[0], "__Unable to extract image from the replied message.__"
@@ -171,7 +175,9 @@ async def iresize(event):
         )
     args = (event.pattern_match.group(1)).split()
     catevent = await edit_or_reply(event, "__Resizeing the replied media...__")
-    imag = await Convert.to_image(catevent, reply, dirct="./temp", file="iresize.png", noedits=True)
+    imag = await Convert.to_image(
+        catevent, reply, dirct="./temp", file="iresize.png", noedits=True
+    )
     if imag[1] is None:
         return await edit_delete(
             imag[0], "__Unable to extract image from the replied message.__"
@@ -222,7 +228,9 @@ async def square_cmd(event):
         return await edit_delete(event, "__Reply to photo to make it square image.__")
     catevent = await event.edit("__Adding borders to make it square....__")
     try:
-        imag = await Convert.to_image(catevent, reply, dirct="./temp", file="square.png", noedits=True)
+        imag = await Convert.to_image(
+            catevent, reply, dirct="./temp", file="square.png", noedits=True
+        )
         if imag[1] is None:
             return await edit_delete(
                 imag[0], "__Unable to extract image from the replied message.__"
@@ -275,7 +283,9 @@ async def pic_gifcmd(event):
     else:
         pix = 100
     catevent = await edit_or_reply(event, "__🎞Dotifying image...__")
-    imag = await Convert.to_image(catevent, reply, dirct="./temp", file="dotify.png", noedits=True)
+    imag = await Convert.to_image(
+        catevent, reply, dirct="./temp", file="dotify.png", noedits=True
+    )
     if imag[1] is None:
         return await edit_delete(
             imag[0], "__Unable to extract image from the replied message.__"

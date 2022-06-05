@@ -27,7 +27,9 @@ async def _(event):
     if not (reply_message and reply_message.media):
         return await edit_delete(event, "```Reply to a media file...```")
     chat = "@hazmat_suit_bot"
-    output = await Convert.to_image(event, reply_message, dirct="./temp", file="mask.png", rgb=True)
+    output = await Convert.to_image(
+        event, reply_message, dirct="./temp", file="mask.png", rgb=True
+    )
     if output[1] is None:
         return await edit_delete(
             output[0], "__Unable to extract image from the replied message.__"
@@ -65,7 +67,12 @@ async def _(event):
     replied = await event.get_reply_message()
     if not (replied and replied.media):
         return await edit_or_reply(event, "Reply to a supported media file")
-    output = await Convert.to_image(event, replied, dirct="./temp", file="awooify.png", )
+    output = await Convert.to_image(
+        event,
+        replied,
+        dirct="./temp",
+        file="awooify.png",
+    )
     if output[1] is None:
         return await edit_delete(
             output[0], "__Unable to extract image from the replied message.__"
@@ -102,7 +109,12 @@ async def _(event):
     replied = await event.get_reply_message()
     if not (replied and replied.media):
         return await edit_or_reply(event, "Reply to a supported media file")
-    output = await Convert.to_image(event, replied, dirct="./temp", file="lolice.png", )
+    output = await Convert.to_image(
+        event,
+        replied,
+        dirct="./temp",
+        file="lolice.png",
+    )
     if output[1] is None:
         return await edit_delete(
             output[0], "__Unable to extract image from the replied message.__"
@@ -139,7 +151,12 @@ async def _(event):
     replied = await event.get_reply_message()
     if not (replied and replied.media):
         return await edit_or_reply(event, "Reply to a supported media file")
-    output = await Convert.to_image(event, replied,dirct="./temp", file="bun.png", )
+    output = await Convert.to_image(
+        event,
+        replied,
+        dirct="./temp",
+        file="bun.png",
+    )
     if output[1] is None:
         return await edit_delete(
             output[0], "__Unable to extract image from the replied message.__"
@@ -176,7 +193,12 @@ async def _(event):
     replied = await event.get_reply_message()
     if not (replied and replied.media):
         return await edit_or_reply(event, "Reply to a supported media file")
-    output = await Convert.to_image(event, replied,dirct="./temp", file="iphx.png", )
+    output = await Convert.to_image(
+        event,
+        replied,
+        dirct="./temp",
+        file="iphx.png",
+    )
     if output[1] is None:
         return await edit_delete(
             output[0], "__Unable to extract image from the replied message.__"
