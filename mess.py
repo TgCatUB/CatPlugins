@@ -11,8 +11,8 @@ from telethon.tl.functions.channels import GetFullChannelRequest
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 from userbot import catub
 from userbot.core.managers import edit_delete, edit_or_reply
-from userbot.helpers import media_type
-from userbot.helpers.utils import _catutils, reply_id
+from userbot.helpers import media_type, unsavegif
+from userbot.helpers.utils import reply_id
 
 plugin_category = "useless"
 
@@ -48,7 +48,7 @@ async def cat(event):
         badcat = await event.client.send_file(event.chat_id, media, reply_to=reply)
         out = await media_type(media)
         if out in ["Gif", "Video", "Sticker"]:
-            await _catutils.unsavegif(event, badcat)
+            await unsavegif(event, badcat)
     await event.client.delete_messages(conv.chat_id, [msg.id, media.id])
 
 
@@ -109,5 +109,5 @@ async def kiss(event):
     kisss = random.sample(kiss, count)
     for i in kisss:
         nood = await event.client.send_file(event.chat_id, i, reply_to=reply_to_id)
-        await _catutils.unsavegif(event, nood)
+        await unsavegif(event, nood)
     await catevent.delete()
