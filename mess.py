@@ -30,7 +30,7 @@ LOGS = logging.getLogger(__name__)
 async def cat(event):
     "Reply this command to a video to convert it to distorted media"
     reply = await event.get_reply_message()
-    mediatype = media_type(reply)
+    mediatype = await media_type(reply)
     if mediatype and mediatype not in ["Gif", "Video", "Sticker", "Photo", "Voice"]:
         return await edit_delete(event, "__Reply to a media file__")
     cat = await edit_or_reply(event, "__🎞Converting into distorted media..__")
