@@ -9,12 +9,11 @@ import os
 import urllib
 
 import requests
-
 from userbot import catub
-
-from userbot.helpers.functions import age_verification
 from userbot.core.managers import edit_delete, edit_or_reply
-from userbot.helpers import  reply_id
+from userbot.helpers import reply_id
+from userbot.helpers.functions import age_verification
+
 from .helpers import nsfw as useless
 
 plugin_category = "useless"

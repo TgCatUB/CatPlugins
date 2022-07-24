@@ -1,19 +1,18 @@
 # Created by @Jisan7509
 
 import base64
+import contextlib
 import logging
 import random
 
-import requests
 from telethon import functions, types
 from telethon.errors.rpcerrorlist import UserNotParticipantError, YouBlockedUserError
 from telethon.tl.functions.channels import GetFullChannelRequest
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
-
-from userbot.core.managers import edit_delete, edit_or_reply
-from userbot.helpers import media_type
-from userbot.helpers.utils import _catutils, reply_id
 from userbot import catub
+from userbot.core.managers import edit_delete, edit_or_reply
+from userbot.helpers import media_type, unsavegif
+from userbot.helpers.utils import reply_id
 
 plugin_category = "useless"
 
@@ -31,7 +30,7 @@ LOGS = logging.getLogger(__name__)
 async def cat(event):
     "Reply this command to a video to convert it to distorted media"
     reply = await event.get_reply_message()
-    mediatype = media_type(reply)
+    mediatype = await media_type(reply)
     if mediatype and mediatype not in ["Gif", "Video", "Sticker", "Photo", "Voice"]:
         return await edit_delete(event, "__Reply to a media file__")
     cat = await edit_or_reply(event, "__🎞Converting into distorted media..__")
@@ -47,9 +46,9 @@ async def cat(event):
             return
         await cat.delete()
         badcat = await event.client.send_file(event.chat_id, media, reply_to=reply)
-        out = media_type(media)
+        out = await media_type(media)
         if out in ["Gif", "Video", "Sticker"]:
-            await _catutils.unsavegif(event, badcat)
+            await unsavegif(event, badcat)
     await event.client.delete_messages(conv.chat_id, [msg.id, media.id])
 
 
@@ -68,7 +67,7 @@ async def kiss(event):
     """Its useless for single like you. Get a lover first"""
     inpt = event.pattern_match.group(1)
     reply_to_id = await reply_id(event)
-    count = 1 if not inpt else int(inpt)
+    count = int(inpt) if inpt else 1
     if count < 0 and count > 20:
         await edit_delete(event, "`Give value in range 1-20`")
     res = base64.b64decode(
@@ -103,14 +102,12 @@ async def kiss(event):
     async for x in event.client.iter_messages(
         chat, min_id=start, max_id=end, reverse=True
     ):
-        try:
+        with contextlib.suppress(AttributeError):
             if x.media and x.media.document.mime_type == "video/mp4":
                 link = f"{res.split('j')[0]}{chat}/{x.id}"
                 kiss.append(link)
-        except AttributeError:
-            pass
     kisss = random.sample(kiss, count)
     for i in kisss:
         nood = await event.client.send_file(event.chat_id, i, reply_to=reply_to_id)
-        await _catutils.unsavegif(event, nood)
+        await unsavegif(event, nood)
     await catevent.delete()

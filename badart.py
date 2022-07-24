@@ -5,8 +5,9 @@ Plugin for CatUserbot
 """
 
 import asyncio
-from userbot.core.managers import edit_or_reply
+
 from userbot import catub
+from userbot.core.managers import edit_or_reply
 from userbot.plugins import mention
 
 plugin_category = "fun"
@@ -75,7 +76,7 @@ async def kakashi(bsdk):
     "Bad stuff"
     animation_interval = 0.3
     animation_ttl = range(100)
-    bsdk = await edit_or_reply(bsdk, f"**Ahhhhhhhh......**💦💦...")
+    bsdk = await edit_or_reply(bsdk, "**Ahhhhhhhh......**💦💦...")
     animation_chars = [
         "8✊️===D",
         "8=✊️==D",
@@ -105,7 +106,7 @@ async def kakashi(bsdk):
     "Bad stuff"
     animation_interval = 1
     animation_ttl = range(11)
-    bsdk = await edit_or_reply(bsdk, f"**Ohhh nooooo **💦💦...")
+    bsdk = await edit_or_reply(bsdk, "**Ohhh nooooo **💦💦...")
     animation_chars = [
         "**Ohhh Baby..**😈",
         "__**Ohh Yeaah..**__\n\n 😈\n  |\  \n  |  \   \n 8=👊-D\n  |   \         \n 👟 👟       😲",
