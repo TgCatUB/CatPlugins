@@ -3,14 +3,12 @@
 import os
 
 from telegraph import exceptions, upload_file
-from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-
-from userbot import catub
-
-from userbot.Config import Config
-from userbot.core.managers import edit_or_reply
-from userbot.plugins import awooify, baguette, convert_toimage, iphonex, lolice
+from telethon.tl.functions.contacts import UnblockRequest as unblock
+from userbot import Convert, catub
+from userbot.core.managers import edit_delete, edit_or_reply
+from userbot.helpers.functions import delete_conv
+from userbot.plugins import awooify, baguette, iphonex, lolice
 
 plugin_category = "extra"
 
@@ -23,33 +21,37 @@ plugin_category = "extra"
         "usage": "{tr}mask",
     },
 )
-async def _(catbot):
+async def _(event):
     "Hazmat suit maker"
-    reply_message = await catbot.get_reply_message()
-    if not reply_message.media or not reply_message:
-        return await edit_or_reply(catbot, "```reply to media message```")
+    reply_message = await event.get_reply_message()
+    if not (reply_message and reply_message.media):
+        return await edit_delete(event, "```Reply to a media file...```")
     chat = "@hazmat_suit_bot"
-    if reply_message.sender.bot:
-        return await edit_or_reply(catbot, "```Reply to actual users message.```")
-    event = await catbot.edit("```Processing```")
-    async with catbot.client.conversation(chat) as conv:
+    output = await Convert.to_image(
+        event, reply_message, dirct="./temp", file="mask.png", rgb=True
+    )
+    if output[1] is None:
+        return await edit_delete(
+            output[0], "__Unable to extract image from the replied message.__"
+        )
+    await edit_or_reply(output[0], "```Processing...```")
+    async with event.client.conversation(chat) as conv:
         try:
-            response = conv.wait_event(
-                events.NewMessage(incoming=True, from_users=905164246)
-            )
-            await catbot.client.send_message(chat, reply_message)
-            response = await response
+            flag = await conv.send_file(output[1])
         except YouBlockedUserError:
-            return await event.edit(
-                "```Please unblock @hazmat_suit_bot and try again```"
-            )
-        if response.text.startswith("Forward"):
-            await event.edit(
-                "```can you kindly disable your forward privacy settings for good?```"
-            )
-        else:
-            await catbot.client.send_file(event.chat_id, response.message.media)
-            await event.delete()
+            await catub(unblock("hazmat_suit_bot"))
+            flag = await conv.send_file(output[1])
+        response = await conv.get_response()
+        await event.client.send_read_acknowledge(conv.chat_id)
+        await output[0].delete()
+        await event.client.send_file(
+            event.chat_id,
+            response,
+            reply_to=reply_message,
+        )
+    await delete_conv(event, chat, flag)
+    if os.path.exists(output[1]):
+        os.remove(output[1])
 
 
 @catub.cat_cmd(
@@ -60,43 +62,38 @@ async def _(catbot):
         "usage": "{tr}awooify",
     },
 )
-async def catbot(catmemes):
+async def _(event):
     "replied Image will be face of other image"
-    replied = await catmemes.get_reply_message()
-    if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
-        os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
-    if not replied:
-        return await edit_or_reply(catmemes, "reply to a supported media file")
-    if replied.media:
-        catevent = await edit_or_reply(catmemes, "passing to telegraph...")
-    else:
-        return await edit_or_reply(catmemes, "reply to a supported media file")
-    download_location = await catmemes.client.download_media(
-        replied, Config.TMP_DOWNLOAD_DIRECTORY
+    replied = await event.get_reply_message()
+    if not (replied and replied.media):
+        return await edit_or_reply(event, "Reply to a supported media file")
+    output = await Convert.to_image(
+        event,
+        replied,
+        dirct="./temp",
+        file="awooify.png",
     )
-    if download_location.endswith((".webp")):
-        download_location = convert_toimage(download_location)
-    size = os.stat(download_location).st_size
-    if download_location.endswith((".jpg", ".jpeg", ".png", ".bmp", ".ico")):
-        if size > 5242880:
-            os.remove(download_location)
-            return await catevent.edit(
-                "the replied file size is not supported it must me below 5 mb"
-            )
-        await catevent.edit("generating image..")
-    else:
-        os.remove(download_location)
-        return await catevent.edit("the replied file is not supported")
+    if output[1] is None:
+        return await edit_delete(
+            output[0], "__Unable to extract image from the replied message.__"
+        )
+    size = os.stat(output[1]).st_size
+    if size > 5242880:
+        os.remove(output[1])
+        return await output[0].edit(
+            "the replied file size is not supported it must me below 5 mb"
+        )
+    await edit_or_reply(output[0], "`Generating image..`")
     try:
-        response = upload_file(download_location)
-        os.remove(download_location)
+        response = upload_file(output[1])
+        os.remove(output[1])
     except exceptions.TelegraphException as exc:
-        os.remove(download_location)
-        return await catevent.edit(f"ERROR: {str(exc)}")
+        os.remove(output[1])
+        return await edit_or_reply(output[0], f"ERROR: {str(exc)}")
     cat = f"https://telegra.ph{response[0]}"
     cat = await awooify(cat)
-    await catevent.delete()
-    await catmemes.client.send_file(catmemes.chat_id, cat, reply_to=replied)
+    await output[0].delete()
+    await event.client.send_file(event.chat_id, cat, reply_to=replied)
 
 
 @catub.cat_cmd(
@@ -107,43 +104,38 @@ async def catbot(catmemes):
         "usage": "{tr}lolice",
     },
 )
-async def catbot(catmemes):
+async def _(event):
     "replied Image will be face of other image"
-    replied = await catmemes.get_reply_message()
-    if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
-        os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
-    if not replied:
-        return await edit_or_reply(catmemes, "reply to a supported media file")
-    if replied.media:
-        catevent = await edit_or_reply(catmemes, "passing to telegraph...")
-    else:
-        return await edit_or_reply(catmemes, "reply to a supported media file")
-    download_location = await catmemes.client.download_media(
-        replied, Config.TMP_DOWNLOAD_DIRECTORY
+    replied = await event.get_reply_message()
+    if not (replied and replied.media):
+        return await edit_or_reply(event, "Reply to a supported media file")
+    output = await Convert.to_image(
+        event,
+        replied,
+        dirct="./temp",
+        file="lolice.png",
     )
-    if download_location.endswith((".webp")):
-        download_location = convert_toimage(download_location)
-    size = os.stat(download_location).st_size
-    if download_location.endswith((".jpg", ".jpeg", ".png", ".bmp", ".ico")):
-        if size > 5242880:
-            os.remove(download_location)
-            return await catevent.edit(
-                "the replied file size is not supported it must me below 5 mb"
-            )
-        await catevent.edit("generating image..")
-    else:
-        os.remove(download_location)
-        return await catevent.edit("the replied file is not supported")
+    if output[1] is None:
+        return await edit_delete(
+            output[0], "__Unable to extract image from the replied message.__"
+        )
+    size = os.stat(output[1]).st_size
+    if size > 5242880:
+        os.remove(output[1])
+        return await output[0].edit(
+            "the replied file size is not supported it must me below 5 mb"
+        )
+    await edit_or_reply(output[0], "`Generating image..`")
     try:
-        response = upload_file(download_location)
-        os.remove(download_location)
+        response = upload_file(output[1])
+        os.remove(output[1])
     except exceptions.TelegraphException as exc:
-        os.remove(download_location)
-        return await catevent.edit(f"ERROR: {str(exc)}")
+        os.remove(output[1])
+        return await edit_or_reply(output[0], f"ERROR: {str(exc)}")
     cat = f"https://telegra.ph{response[0]}"
     cat = await lolice(cat)
-    await catevent.delete()
-    await catmemes.client.send_file(catmemes.chat_id, cat, reply_to=replied)
+    await output[0].delete()
+    await event.client.send_file(event.chat_id, cat, reply_to=replied)
 
 
 @catub.cat_cmd(
@@ -154,43 +146,38 @@ async def catbot(catmemes):
         "usage": "{tr}bun",
     },
 )
-async def catbot(catmemes):
+async def _(event):
     "replied Image will be face of other image"
-    replied = await catmemes.get_reply_message()
-    if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
-        os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
-    if not replied:
-        return await edit_or_reply(catmemes, "reply to a supported media file")
-    if replied.media:
-        catevent = await edit_or_reply(catmemes, "passing to telegraph...")
-    else:
-        return await edit_or_reply(catmemes, "reply to a supported media file")
-    download_location = await catmemes.client.download_media(
-        replied, Config.TMP_DOWNLOAD_DIRECTORY
+    replied = await event.get_reply_message()
+    if not (replied and replied.media):
+        return await edit_or_reply(event, "Reply to a supported media file")
+    output = await Convert.to_image(
+        event,
+        replied,
+        dirct="./temp",
+        file="bun.png",
     )
-    if download_location.endswith((".webp")):
-        download_location = convert_toimage(download_location)
-    size = os.stat(download_location).st_size
-    if download_location.endswith((".jpg", ".jpeg", ".png", ".bmp", ".ico")):
-        if size > 5242880:
-            os.remove(download_location)
-            return await catevent.edit(
-                "the replied file size is not supported it must me below 5 mb"
-            )
-        await catevent.edit("generating image..")
-    else:
-        os.remove(download_location)
-        return await catevent.edit("the replied file is not supported")
+    if output[1] is None:
+        return await edit_delete(
+            output[0], "__Unable to extract image from the replied message.__"
+        )
+    size = os.stat(output[1]).st_size
+    if size > 5242880:
+        os.remove(output[1])
+        return await output[0].edit(
+            "the replied file size is not supported it must me below 5 mb"
+        )
+    await edit_or_reply(output[0], "`Generating image..`")
     try:
-        response = upload_file(download_location)
-        os.remove(download_location)
+        response = upload_file(output[1])
+        os.remove(output[1])
     except exceptions.TelegraphException as exc:
-        os.remove(download_location)
-        return await catevent.edit(f"ERROR: {str(exc)}")
+        os.remove(output[1])
+        return await edit_or_reply(output[0], f"ERROR: {str(exc)}")
     cat = f"https://telegra.ph{response[0]}"
     cat = await baguette(cat)
-    await catevent.delete()
-    await catmemes.client.send_file(catmemes.chat_id, cat, reply_to=replied)
+    await output[0].delete()
+    await event.client.send_file(event.chat_id, cat, reply_to=replied)
 
 
 @catub.cat_cmd(
@@ -201,40 +188,35 @@ async def catbot(catmemes):
         "usage": "{tr}iphx",
     },
 )
-async def catbot(catmemes):
+async def _(event):
     "replied image as iphone x wallpaper."
-    replied = await catmemes.get_reply_message()
-    if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
-        os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
-    if not replied:
-        return await edit_or_reply(catmemes, "reply to a supported media file")
-    if replied.media:
-        catevent = await edit_or_reply(catmemes, "passing to telegraph...")
-    else:
-        return await edit_or_reply(catmemes, "reply to a supported media file")
-    download_location = await catmemes.client.download_media(
-        replied, Config.TMP_DOWNLOAD_DIRECTORY
+    replied = await event.get_reply_message()
+    if not (replied and replied.media):
+        return await edit_or_reply(event, "Reply to a supported media file")
+    output = await Convert.to_image(
+        event,
+        replied,
+        dirct="./temp",
+        file="iphx.png",
     )
-    if download_location.endswith((".webp")):
-        download_location = convert_toimage(download_location)
-    size = os.stat(download_location).st_size
-    if download_location.endswith((".jpg", ".jpeg", ".png", ".bmp", ".ico")):
-        if size > 5242880:
-            os.remove(download_location)
-            return await catevent.edit(
-                "the replied file size is not supported it must me below 5 mb"
-            )
-        await catevent.edit("generating image..")
-    else:
-        os.remove(download_location)
-        return await catevent.edit("the replied file is not supported")
+    if output[1] is None:
+        return await edit_delete(
+            output[0], "__Unable to extract image from the replied message.__"
+        )
+    size = os.stat(output[1]).st_size
+    if size > 5242880:
+        os.remove(output[1])
+        return await output[0].edit(
+            "the replied file size is not supported it must me below 5 mb"
+        )
+    await edit_or_reply(output[0], "`Generating image..`")
     try:
-        response = upload_file(download_location)
-        os.remove(download_location)
+        response = upload_file(output[1])
+        os.remove(output[1])
     except exceptions.TelegraphException as exc:
-        os.remove(download_location)
-        return await catevent.edit(f"ERROR: {str(exc)}")
+        os.remove(output[1])
+        return await edit_or_reply(output[0], f"ERROR: {str(exc)}")
     cat = f"https://telegra.ph{response[0]}"
     cat = await iphonex(cat)
-    await catevent.delete()
-    await catmemes.client.send_file(catmemes.chat_id, cat, reply_to=replied)
+    await output[0].delete()
+    await event.client.send_file(event.chat_id, cat, reply_to=replied)

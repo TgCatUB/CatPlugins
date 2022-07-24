@@ -1,7 +1,6 @@
 import random
 
 from userbot import catub
-
 from userbot.core.managers import edit_or_reply
 from userbot.plugins import fonts
 
@@ -124,7 +123,7 @@ async def stylish_generator(event):
     if not args:
         await edit_or_reply(event, "What I am Supposed to change give text")
         return
-    string = "  ".join(args).lower()
+    string = "".join(args).lower()
     for normaltextcharacter in string:
         if normaltextcharacter in fonts.normaltext:
             smallcapscharacter = fonts.smallcapsfont[
@@ -155,7 +154,7 @@ async def stylish_generator(event):
     if not args:
         await edit_or_reply(event, "What I am Supposed to change give text")
         return
-    string = "  ".join(args).lower()
+    string = "".join(args).lower()
     for normaltextcharacter in string:
         if normaltextcharacter in fonts.normaltext:
             bubblesblackcharacter = fonts.bubblesblackfont[
@@ -186,7 +185,7 @@ async def stylish_generator(event):
     if not args:
         await edit_or_reply(event, "What I am Supposed to change give text")
         return
-    string = "  ".join(args).lower()
+    string = "".join(args).lower()
     for normaltextcharacter in string:
         if normaltextcharacter in fonts.normaltext:
             bubblescharacter = fonts.bubblesfont[
@@ -214,7 +213,7 @@ async def stylish_generator(event):
     if not args:
         await edit_or_reply(event, "What I am Supposed to change give text")
         return
-    string = "  ".join(args).lower()
+    string = "".join(args).lower()
     for normaltextcharacter in string:
         if normaltextcharacter in fonts.normaltext:
             tantextcharacter = fonts.tantextfont[
@@ -242,7 +241,7 @@ async def stylish_generator(event):
     if not args:
         await edit_or_reply(event, "What I am Supposed to change give text")
         return
-    string = "  ".join(args).lower()
+    string = "".join(args).lower()
     for normaltextcharacter in string:
         if normaltextcharacter in fonts.normaltext:
             littleboxtextcharacter = fonts.littleboxtextfont[
@@ -273,7 +272,7 @@ async def stylish_generator(event):
     if not args:
         await edit_or_reply(event, "What I am Supposed to change give text")
         return
-    string = "  ".join(args).lower()
+    string = "".join(args).lower()
     for normaltextcharacter in string:
         if normaltextcharacter in fonts.normaltext:
             smothtextcharacter = fonts.smothtextfont[
@@ -301,7 +300,7 @@ async def stylish_generator(event):
     if not args:
         await edit_or_reply(event, "What I am Supposed to change give text")
         return
-    string = "  ".join(args).lower()
+    string = "".join(args).lower()
     for normaltextcharacter in string:
         if normaltextcharacter in fonts.normaltext:
             egyptfontcharacter = fonts.egyptfontfont[
@@ -329,7 +328,7 @@ async def stylish_generator(event):
     if not args:
         await edit_or_reply(event, "What I am Supposed to change give text")
         return
-    string = "  ".join(args).lower()
+    string = "".join(args).lower()
     for normaltextcharacter in string:
         if normaltextcharacter in fonts.normaltext:
             nightmarecharacter = fonts.nightmarefont[
@@ -357,7 +356,7 @@ async def stylish_generator(event):
     if not args:
         await edit_or_reply(event, "What I am Supposed to change give text")
         return
-    string = "  ".join(args).lower()
+    string = "".join(args).lower()
     for normaltextcharacter in string:
         if normaltextcharacter in fonts.normaltext:
             hwcapitalcharacter = fonts.hwcapitalfont[
@@ -388,7 +387,7 @@ async def stylish_generator(event):
     if not args:
         await edit_or_reply(event, "What I am Supposed to change give text")
         return
-    string = "  ".join(args).lower()
+    string = "".join(args).lower()
     for normaltextcharacter in string:
         if normaltextcharacter in fonts.normaltext:
             doubletextcharacter = fonts.doubletextfont[
@@ -448,7 +447,7 @@ async def stylish_generator(event):
     if not args:
         await edit_or_reply(event, "What I am Supposed to change give text")
         return
-    string = "  ".join(args).lower()
+    string = "".join(args).lower()
     for normaltextcharacter in string:
         if normaltextcharacter in fonts.normaltext:
             ghostfontcharacter = fonts.ghostfontfont[
@@ -476,7 +475,7 @@ async def stylish_generator(event):
     if not args:
         await edit_or_reply(event, "What I am Supposed to change give text")
         return
-    string = "  ".join(args).lower()
+    string = "".join(args).lower()
     for normaltextcharacter in string:
         if normaltextcharacter in fonts.normaltext:
             hwslcharacter = fonts.hwslfont[fonts.normaltext.index(normaltextcharacter)]

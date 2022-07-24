@@ -1,7 +1,7 @@
 # corona virus stats for catuserbot
-from covid import Covid
-
 from userbot.plugins import catub, covidindia, edit_delete, edit_or_reply
+
+from covid import Covid
 
 plugin_category = "extra"
 
@@ -39,8 +39,7 @@ async def corona(event):
         data += f"\n🥺 New Cases   : <code>{country_data['new_cases']}</code>"
         data += f"\n😟 New Deaths : <code>{country_data['new_deaths']}</code>"
         await catevent.edit(
-            "<b>Corona Virus Info of {}:\n{}</b>".format(country, data),
-            parse_mode="html",
+            f"<b>Corona Virus Info of {country}:\n{data}</b>", parse_mode="html"
         )
     else:
         data = await covidindia(country)

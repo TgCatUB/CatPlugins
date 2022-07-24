@@ -4,13 +4,10 @@ import os
 from io import BytesIO
 
 from PIL import Image, ImageFilter, ImageOps
-
-from userbot import catub
-
+from userbot import Convert, catub
 from userbot.core.managers import edit_delete, edit_or_reply
 from userbot.helpers import media_type
 from userbot.helpers.functions import dotify
-from userbot.helpers.utils import _cattools
 
 plugin_category = "fun"
 
@@ -37,10 +34,11 @@ plugin_category = "fun"
         ],
     },
 )
-async def imirror(event):    # sourcery no-metrics
+async def imirror(event):  # sourcery no-metrics
+    # sourcery skip: low-code-quality
     "imgae refelection fun."
     reply = await event.get_reply_message()
-    mediatype = media_type(reply)
+    mediatype = await media_type(reply)
     if not reply or not mediatype or mediatype not in ["Photo", "Sticker"]:
         return await edit_delete(event, "__Reply to photo or sticker to make mirror.__")
     catevent = await event.edit("__Reflecting the image....__")
@@ -52,7 +50,9 @@ async def imirror(event):    # sourcery no-metrics
         filename = "catuserbot.jpg"
         f_format = "jpeg"
     try:
-        imag = await _cattools.media_to_pic(catevent, reply, noedits=True)
+        imag = await Convert.to_image(
+            catevent, reply, dirct="./temp", file="imirror.png", noedits=True
+        )
         if imag[1] is None:
             return await edit_delete(
                 imag[0], "__Unable to extract image from the replied message.__"
@@ -117,7 +117,7 @@ async def imirror(event):    # sourcery no-metrics
 async def irotate(event):
     "To convert replied image or sticker to gif"
     reply = await event.get_reply_message()
-    mediatype = media_type(reply)
+    mediatype = await media_type(reply)
     if not reply or not mediatype or mediatype not in ["Photo", "Sticker"]:
         return await edit_delete(
             event, "__Reply to photo or sticker to rotate it with given angle.__"
@@ -129,7 +129,9 @@ async def irotate(event):
         )
     args = event.pattern_match.group(1)
     catevent = await edit_or_reply(event, "__Rotating the replied media...__")
-    imag = await _cattools.media_to_pic(catevent, reply, noedits=True)
+    imag = await Convert.to_image(
+        catevent, reply, dirct="./temp", file="irotate.png", noedits=True
+    )
     if imag[1] is None:
         return await edit_delete(
             imag[0], "__Unable to extract image from the replied message.__"
@@ -163,7 +165,7 @@ async def irotate(event):
 async def iresize(event):
     "To resize the replied image/sticker"
     reply = await event.get_reply_message()
-    mediatype = media_type(reply)
+    mediatype = await media_type(reply)
     if not reply or not mediatype or mediatype not in ["Photo", "Sticker"]:
         return await edit_delete(event, "__Reply to photo or sticker to resize it.__")
     if mediatype == "Sticker" and reply.document.mime_type == "application/i-tgsticker":
@@ -173,7 +175,9 @@ async def iresize(event):
         )
     args = (event.pattern_match.group(1)).split()
     catevent = await edit_or_reply(event, "__Resizeing the replied media...__")
-    imag = await _cattools.media_to_pic(catevent, reply, noedits=True)
+    imag = await Convert.to_image(
+        catevent, reply, dirct="./temp", file="iresize.png", noedits=True
+    )
     if imag[1] is None:
         return await edit_delete(
             imag[0], "__Unable to extract image from the replied message.__"
@@ -219,12 +223,14 @@ async def iresize(event):
 async def square_cmd(event):
     "Converts replied image to square image."
     reply = await event.get_reply_message()
-    mediatype = media_type(reply)
+    mediatype = await media_type(reply)
     if not reply or not mediatype or mediatype not in ["Photo"]:
         return await edit_delete(event, "__Reply to photo to make it square image.__")
     catevent = await event.edit("__Adding borders to make it square....__")
     try:
-        imag = await _cattools.media_to_pic(catevent, reply, noedits=True)
+        imag = await Convert.to_image(
+            catevent, reply, dirct="./temp", file="square.png", noedits=True
+        )
         if imag[1] is None:
             return await edit_delete(
                 imag[0], "__Unable to extract image from the replied message.__"
@@ -261,7 +267,7 @@ async def square_cmd(event):
 async def pic_gifcmd(event):
     "To convert image into doted image"
     reply = await event.get_reply_message()
-    mediatype = media_type(reply)
+    mediatype = await media_type(reply)
     if not reply or not mediatype or mediatype not in ["Photo", "Sticker"]:
         return await edit_delete(
             event, "__Reply to photo or sticker to make it doted image.__"
@@ -277,7 +283,9 @@ async def pic_gifcmd(event):
     else:
         pix = 100
     catevent = await edit_or_reply(event, "__🎞Dotifying image...__")
-    imag = await _cattools.media_to_pic(catevent, reply, noedits=True)
+    imag = await Convert.to_image(
+        catevent, reply, dirct="./temp", file="dotify.png", noedits=True
+    )
     if imag[1] is None:
         return await edit_delete(
             imag[0], "__Unable to extract image from the replied message.__"

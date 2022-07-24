@@ -1,7 +1,7 @@
 import asyncio
+from datetime import datetime
 
 from userbot.plugins import catub, edit_or_reply
-from datetime import datetime
 
 plugin_category = "fun"
 

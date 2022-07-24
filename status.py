@@ -2,7 +2,6 @@ import os
 import urllib
 
 from telethon.tl import functions
-
 from userbot import catub
 from userbot.core.managers import edit_delete, edit_or_reply
 from userbot.sql_helper.globals import addgvar, gvarstatus
@@ -46,8 +45,7 @@ async def pussy(event):
     first_name = user.first_name
     addgvar("my_first_name", first_name)
     addgvar("my_last_name", "")
-    last_name = user.last_name
-    if last_name:
+    if last_name := user.last_name:
         addgvar("my_last_name", last_name)
     tag_name = OFFLINE_TAG
     await event.client(

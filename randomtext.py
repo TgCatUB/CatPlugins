@@ -13,7 +13,6 @@ import random
 from asyncio import sleep
 
 from userbot import catub
-
 from userbot.core.managers import edit_or_reply
 
 plugin_category = "extra"
@@ -587,7 +586,7 @@ async def _(event):
         "usage": "{tr}bello",
     },
 )
-async def _(event):  # sourcery no-metrics
+async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
     "To get random sentences to start conversation."
     event = await edit_or_reply(event, "Typing....")
     await sleep(2)
@@ -978,7 +977,7 @@ async def _(event):  # sourcery no-metrics
         "usage": "{tr}tip",
     },
 )
-async def _(event):  # sourcery no-metrics
+async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
     "To get random life tips."
     await edit_or_reply(event, "Well, let me give you a life-pro tip... 😉")
     await sleep(2)
@@ -1345,7 +1344,7 @@ async def _(event):  # sourcery no-metrics
         "usage": "{tr}qt",
     },
 )
-async def _(event):  # sourcery no-metrics
+async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
     "To ask random questions."
     event = await edit_or_reply(event, "selecting question...")
     await sleep(2)
@@ -1538,7 +1537,7 @@ async def _(event):  # sourcery no-metrics
         "usage": "{tr}logic",
     },
 )
-async def _(event):  # sourcery no-metrics
+async def _(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
     "To get random logical sentences."
     x = random.randrange(1, 104)
     event = await edit_or_reply(event, "`Wait me getting a logic for you`")

@@ -4,10 +4,9 @@ Idea by @BlazingRobonix
 """
 
 from telethon.utils import get_display_name
-
 from userbot import catub
-
 from userbot.core.managers import edit_delete, edit_or_reply
+from userbot.plugins import get_user_from_event
 from userbot.sql_helper.echo_sql import (
     addecho,
     get_all_echos,
@@ -17,7 +16,6 @@ from userbot.sql_helper.echo_sql import (
     remove_echo,
     remove_echos,
 )
-from userbot.plugins import get_user_from_event
 
 plugin_category = "fun"
 
@@ -106,8 +104,7 @@ async def echo(event):
 )
 async def echo(event):
     "To delete echo in this chat."
-    input_str = event.pattern_match.group(1)
-    if input_str:
+    if input_str := event.pattern_match.group(1):
         lecho = get_all_echos()
         if len(lecho) == 0:
             return await edit_delete(
@@ -151,7 +148,7 @@ async def echo(event):
         ],
     },
 )
-async def echo(event):  # sourcery no-metrics
+async def echo(event):  # sourcery no-metrics  # sourcery skip: low-code-quality
     "To list all users on who you enabled echoing."
     input_str = event.pattern_match.group(1)
     private_chats = ""

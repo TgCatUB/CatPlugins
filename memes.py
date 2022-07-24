@@ -9,9 +9,7 @@ import re
 import requests
 from cowpy import cow
 from telethon.tl.types import ChannelParticipantsAdmins
-
 from userbot import catub
-
 from userbot.core.managers import edit_delete, edit_or_reply
 from userbot.helpers import catmemes, get_user_from_event
 from userbot.helpers.utils import _catutils, parse_pre
@@ -320,20 +318,7 @@ async def smrk(smk):
 async def payf(event):
     "Pay Respects."
     paytext = event.pattern_match.group(1)
-    pay = "{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}".format(
-        paytext * 8,
-        paytext * 8,
-        paytext * 2,
-        paytext * 2,
-        paytext * 2,
-        paytext * 6,
-        paytext * 6,
-        paytext * 2,
-        paytext * 2,
-        paytext * 2,
-        paytext * 2,
-        paytext * 2,
-    )
+    pay = f"{paytext * 8}\n{paytext * 8}\n{paytext * 2}\n{paytext * 2}\n{paytext * 2}\n{paytext * 6}\n{paytext * 6}\n{paytext * 2}\n{paytext * 2}\n{paytext * 2}\n{paytext * 2}\n{paytext * 2}"
     await edit_or_reply(event, pay)
 
 
@@ -432,13 +417,7 @@ async def gbun(event):
                 "`Wait a second, This is my master!`\n**How dare you threaten to ban my master nigger!**\n\n__Your account has been hacked! Pay 69$ to my master__ [π.$](tg://user?id=1035034432) __to release your account__😏"
             )
         else:
-            jnl = (
-                "`Warning!! `"
-                "[{}](tg://user?id={})"
-                "` 𝙂𝘽𝘼𝙉𝙉𝙀𝘿 By Admin...\n\n`"
-                "**user's Name: ** __{}__\n"
-                "**ID : ** `{}`\n"
-            ).format(firstname, idd, firstname, idd)
+            jnl = f"`Warning!! `[{firstname}](tg://user?id={idd})` 𝙂𝘽𝘼𝙉𝙉𝙀𝘿 By Admin...\n\n`**user's Name: ** __{firstname}__\n**ID : ** `{idd}`\n"
             if usname is None:
                 jnl += "**Victim Nigga's username: ** `Doesn't own a username!`\n"
             else:
