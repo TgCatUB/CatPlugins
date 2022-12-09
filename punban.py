@@ -2,10 +2,9 @@
 # All rights reserved.
 
 import asyncio
-import contextlib
 import os
-import re
 import random
+import re
 
 import requests
 from bs4 import BeautifulSoup
@@ -25,18 +24,17 @@ horny = useless.nsfw(useless.pawn)
 plugin_category = "useless"
 
 
-
-def redlink(link,checker=False):
+def redlink(link, checker=False):
     pattern = re.compile(r"redgifs\.com\/?(?:watch\/)?([^\n.-]*)")
     regx = pattern.search(link)
-    link = "https://www.redgifs.com/watch/"+regx[1]
-    if checker: 
+    link = "https://www.redgifs.com/watch/" + regx[1]
+    if checker:
         return link, f"./temp/{regx[1]}.mp4"
     return link
 
 
 def redgif(link):
-    link,file_name = redlink(link, True)
+    link, file_name = redlink(link, True)
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
     red = requests.Session()
@@ -48,17 +46,17 @@ def redgif(link):
     except IndexError:
         media_url = links[0]
     with red.get(media_url, stream=True) as r:
-        with open(file_name, 'wb') as f:
+        with open(file_name, "wb") as f:
             for chunk in r.iter_content(chunk_size=8192):
                 f.write(chunk)
             return file_name
-   
-   
+
+
 async def message_splitter(string_list, string, event):
     message = []
     for i in string_list:
         string += f"{i}\n"
-        if len(string)>4000:
+        if len(string) > 4000:
             message.append(string)
             string = ""
     if string:
@@ -72,7 +70,6 @@ async def message_splitter(string_list, string, event):
                 event.chat_id, message[i], parse_mode="html", reply_to=reply_to_msg
             )
             reply_to_msg = new_event.id
-
 
 
 @catub.cat_cmd(
@@ -100,7 +97,9 @@ async def very(event):  # sourcery skip: low-code-quality
         return
     max_try = 0
     while max_try < 5:
-        subreddit_api = f"{API}/{sub_r}" if sub_r else f"{API}/{random.choice(useless.pawn)}"
+        subreddit_api = (
+            f"{API}/{sub_r}" if sub_r else f"{API}/{random.choice(useless.pawn)}"
+        )
         try:
             cn = requests.get(subreddit_api)
             r = cn.json()
@@ -119,7 +118,7 @@ async def very(event):  # sourcery skip: low-code-quality
         if "https://i.imgur.com" in media_url and media_url.endswith(".gifv"):
             media_url = media_url.replace(".gifv", ".mp4")
         elif "redgifs" in media_url:
-            media_url = redgif(media_url) 
+            media_url = redgif(media_url)
         try:
             sandy = await event.client.send_file(
                 event.chat_id,
@@ -134,7 +133,7 @@ async def very(event):  # sourcery skip: low-code-quality
                     os.remove(media_url)
             await event.delete()
             break
-        except (WebpageCurlFailedError,ValueError):
+        except (WebpageCurlFailedError, ValueError):
             await edit_or_reply(event, f"**Value error!!..Link is :** {media_url}")
             await asyncio.sleep(3)
             await edit_or_reply(
@@ -173,7 +172,7 @@ async def bad(event):  # sourcery skip: low-code-quality
         sub_r = intxt
         if " " in intxt:
             sub_r, count = intxt.split(" ")
-            
+
     if int(count) > 30:
         return await edit_delete(event, "**Value error!.. Count value 1 to 30**")
     await edit_or_reply(event, "**Just hold a sec u horny kid...**")
@@ -223,7 +222,7 @@ async def bad(event):  # sourcery skip: low-code-quality
                 f"**Bluk Download Started.\n\nCatagory :  `{sub_r}`\nFile Downloaded :  {i}/{count}**",
             )
             await asyncio.sleep(2)
-        except (WebpageCurlFailedError,ValueError):
+        except (WebpageCurlFailedError, ValueError):
             await event.client.send_message(
                 event.chat_id, f"**Value error!!..Link is :** {m}"
             )
@@ -245,7 +244,7 @@ async def bad(event):  # sourcery skip: low-code-quality
     },
 )
 async def pussy(event):
-    """Send a list of reddit posts"""  
+    """Send a list of reddit posts"""
     count = 5
     sub_r = random.choice(useless.pawn)
     reply_to = await reply_id(event)
@@ -348,7 +347,7 @@ async def cat(event):
         event,
         f"**{len(listlink)} results found for {xtext} :\nSending {xcount if xcount else 'All'} results out of them.**",
     )
-    
+
     mylink = listlink[: int(xcount)] if xcount else listlink
     for count, (l, n) in enumerate(zip(mylink, listname), start=1):
         req = requests.get(l)
@@ -356,7 +355,9 @@ async def cat(event):
         soups = soup.find("div", {"id": "video-player-bg"})
         for a in soups.find_all("a", href=True):
             link = a["href"]
-        pwnlist.append(f"<b><i>{count}. <a href = {link}>{n.replace('_',' ').title()}</a></b>")
+        pwnlist.append(
+            f"<b><i>{count}. <a href = {link}>{n.replace('_',' ').title()}</a></b>"
+        )
 
     string = f"<b>Showing {xcount}/{len(listlink)} results for {xtext}.</b>\n\n"
     await message_splitter(pwnlist, string, event)
@@ -395,7 +396,7 @@ async def wants_ur_noods(event):  # sourcery skip: low-code-quality
     for m in plink:
         media_url = m
         if not m.startswith("https://"):
-            m = "https://"+m
+            m = "https://" + m
         if "xvideo" in m:
             if ".mp4" not in m:
                 req = requests.get(m)
@@ -429,7 +430,7 @@ async def wants_ur_noods(event):  # sourcery skip: low-code-quality
                 event, f"**Download Started.\n\nFile Downloaded :  {i+1}/{len(plink)}**"
             )
             await asyncio.sleep(2)
-        except (WebpageCurlFailedError,ValueError):
+        except (WebpageCurlFailedError, ValueError):
             await event.client.send_message(
                 event.chat_id, f"**Value error!!..Link is :** {m}"
             )
