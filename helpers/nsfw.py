@@ -155,4 +155,4 @@ def nsfw(catagory):
     return horny
 
 
-API = "https://catmemeapi.herokuapp.com/gimme"
+API = "https://catmemeapi2023.herokuapp.com/gimme"
