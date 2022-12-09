@@ -12,7 +12,7 @@ from simplejson.errors import JSONDecodeError
 from userbot import catub
 from userbot.core.managers import edit_delete, edit_or_reply
 from userbot.helpers.functions import age_verification, unsavegif
-from userbot.helpers.utils import _catutils, reply_id
+from userbot.helpers.utils import reply_id
 
 from .helpers import nsfw as useless
 
