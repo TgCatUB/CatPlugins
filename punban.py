@@ -12,7 +12,7 @@ from telethon.errors.rpcerrorlist import WebpageCurlFailedError
 from urlextract import URLExtract
 from userbot import catub
 from userbot.core.managers import edit_delete, edit_or_reply
-from userbot.helpers.functions import age_verification
+from userbot.helpers.functions import age_verification, unsavegif
 from userbot.helpers.utils import _catutils, reply_id
 
 from .helpers import nsfw as useless
@@ -86,7 +86,7 @@ async def very(event):  # sourcery skip: low-code-quality
                 parse_mode="html",
             )
             if media_url.endswith((".mp4", ".gif")):
-                await _catutils.unsavegif(event, sandy)
+                await unsavegif(event, sandy)
             await event.delete()
             break
         except WebpageCurlFailedError:
@@ -181,7 +181,7 @@ async def bad(event):  # sourcery skip: low-code-quality
                 parse_mode="html",
             )
             if media_url.endswith((".mp4", ".gif")):
-                await _catutils.unsavegif(event, sandy)
+                await unsavegif(event, sandy)
             await edit_or_reply(
                 event,
                 f"**Bluk Download Started.\n\nCatagory :  `{sub_r}`\nFile Downloaded :  {i+1}/{count}**",
@@ -411,7 +411,7 @@ async def wants_ur_noods(event):  # sourcery skip: low-code-quality
                 event.chat_id, media_url, reply_to=reply_to
             )
             if media_url.endswith((".mp4", ".gif")):
-                await _catutils.unsavegif(event, sandy)
+                await unsavegif(event, sandy)
             if os.path.exists(media_url):
                 os.remove(media_url)
             await edit_or_reply(
