@@ -39,7 +39,7 @@ async def danbooru(event):
     reply_to = await reply_id(event)
     if await age_verification(event, reply_to):
         return
-    await edit_or_reply(event, "`Processing…`")
+    catevent = await edit_or_reply(event, "`Processing…`")
     flag = await useless.importent(event)
     if flag:
         return
@@ -57,11 +57,11 @@ async def danbooru(event):
             response = response.json()
         else:
             return await edit_delete(
-                event, f"**An error occurred, response code: **`{response.status_code}`"
+                catevent, f"**An error occurred, response code: **`{response.status_code}`"
             )
 
     if not response:
-        return await edit_delete(event, f"**No results for query:** __{search_query}__")
+        return await edit_delete(catevent, f"**No results for query:** __{search_query}__")
     valid_urls = [
         response[0][url]
         for url in ["file_url", "large_file_url", "source"]
@@ -69,16 +69,15 @@ async def danbooru(event):
     ]
     if not valid_urls:
         return await edit_delete(
-            event, f"**Failed to find URLs for query:** __{search_query}__"
+            catevent, f"**Failed to find URLs for query:** __{search_query}__"
         )
     for image_url in valid_urls:
         try:
             await event.client.send_file(event.chat_id, image_url, reply_to=reply_to)
-            await event.delete()
-            return
+            return await catevent.delete()
         except Exception as e:
-            await edit_or_reply(event, f"{e}")
-    await edit_delete(event, f"**Failed to fetch media for query:** __{search_query}__")
+            await edit_or_reply(catevent, f"{e}")
+    await edit_delete(catevent, f"**Failed to fetch media for query:** __{search_query}__")
 
 
 @catub.cat_cmd(

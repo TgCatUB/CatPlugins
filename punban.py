@@ -89,10 +89,10 @@ async def very(event):  # sourcery skip: low-code-quality
     """Random porn post"""
     reply_to = await reply_id(event)
     sub_r = event.pattern_match.group(1)
-    await edit_or_reply(event, "**Just hold a sec u horny kid...**")
-    if await age_verification(event, reply_to):
+    catevent = await edit_or_reply(event, "**Just hold a sec u horny kid...**")
+    if await age_verification(catevent, reply_to):
         return
-    flag = await useless.importent(event)
+    flag = await useless.importent(catevent)
     if flag:
         return
     max_try = 0
@@ -104,14 +104,14 @@ async def very(event):  # sourcery skip: low-code-quality
             cn = requests.get(subreddit_api)
             r = cn.json()
         except ValueError:
-            return await edit_delete(event, "Value error!.")
+            return await edit_delete(catevent, "Value error!.")
         try:
             postlink = r["postLink"]
             title = r["title"]
             media_url = r["url"]
         except KeyError:
             return await edit_delete(
-                event,
+                catevent,
                 "**(ノಠ益ಠ)ノ  You sure this is a valid catagory/subreddit ??**",
                 time=20,
             )
@@ -131,20 +131,20 @@ async def very(event):  # sourcery skip: low-code-quality
                 await unsavegif(event, sandy)
                 if os.path.exists(media_url):
                     os.remove(media_url)
-            await event.delete()
+            await catevent.delete()
             break
         except (WebpageCurlFailedError, ValueError):
-            await edit_or_reply(event, f"**Value error!!..Link is :** {media_url}")
+            await edit_or_reply(catevent, f"**Value error!!..Link is :** {media_url}")
             await asyncio.sleep(3)
             await edit_or_reply(
-                event,
+                catevent,
                 f"**Just hold your candel and Sit tight....\n\nAuto retry limit = {max_try+1}/5**",
             )
             await asyncio.sleep(1)
             max_try += 1
             if max_try == 5:
                 await edit_delete(
-                    event,
+                    catevent,
                     "**ಥ‿ಥ   Sorry i could'nt found, try with difference catagory**",
                 )
 
@@ -175,10 +175,10 @@ async def bad(event):
 
     if int(count) > 30:
         return await edit_delete(event, "**Value error!.. Count value 1 to 30**")
-    await edit_or_reply(event, "**Just hold a sec u horny kid...**")
-    if await age_verification(event, reply_to):
+    catevent = await edit_or_reply(event, "**Just hold a sec u horny kid...**")
+    if await age_verification(catevent, reply_to):
         return
-    flag = await useless.importent(event)
+    flag = await useless.importent(catevent)
     if flag:
         return
     subreddit_api = f"{API}/{sub_r}/{count}"
@@ -186,7 +186,7 @@ async def bad(event):
         cn = requests.get(subreddit_api)
         r = cn.json()
     except ValueError:
-        return await edit_delete(event, "Value error!.")
+        return await edit_delete(catevent, "Value error!.")
     title = []
     postlink = []
     media_url = []
@@ -196,9 +196,7 @@ async def bad(event):
         media_url.extend(x["url"] for x in r["memes"])
     except KeyError:
         return await edit_delete(
-            event,
-            "**(ノಠ益ಠ)ノ  You sure this is a valid catagory/subreddit ??**",
-            time=20,
+            catevent, "**(ノಠ益ಠ)ノ  You sure this is a valid catagory/subreddit ??**", time=20
         )
     for i, (m, p, t) in enumerate(zip(media_url, postlink, title), start=1):
         if "https://i.imgur.com" in m and m.endswith(".gifv"):
@@ -220,7 +218,7 @@ async def bad(event):
                 if os.path.exists(media_url):
                     os.remove(media_url)
             await edit_or_reply(
-                event,
+                catevent,
                 f"**Bulk Download Started.\n\nCatagory :  `{sub_r}`\nFile Downloaded :  {i}/{count}**",
             )
             await asyncio.sleep(2)
@@ -229,7 +227,7 @@ async def bad(event):
                 event.chat_id, f"**Value error!!..Link is :** {m}"
             )
         if i == int(count):
-            await event.delete()
+            await catevent.delete()
 
 
 @catub.cat_cmd(
@@ -258,16 +256,16 @@ async def pussy(event):
 
     if int(count) > 30:
         return await edit_delete(event, "**Value error!.. Count value 1 to 30**")
-    await edit_or_reply(event, "**Just hold a sec u horny kid...**")
+    catevent = await edit_or_reply(event, "**Just hold a sec u horny kid...**")
     subreddit_api = f"{API}/{sub_r}/{count}"
     try:
         cn = requests.get(subreddit_api)
         r = cn.json()
     except ValueError:
-        return await edit_delete(event, "Value error!.")
-    if await age_verification(event, reply_to):
+        return await edit_delete(catevent, "Value error!.")
+    if await age_verification(catevent, reply_to):
         return
-    flag = await useless.importent(event)
+    flag = await useless.importent(catevent)
     if flag:
         return
     title = []
@@ -278,9 +276,7 @@ async def pussy(event):
         media_url.extend(x["url"] for x in r["memes"])
     except KeyError:
         return await edit_delete(
-            event,
-            "**(ノಠ益ಠ)ノ  You sure this is a valid catagory/subreddit ??**",
-            time=20,
+            catevent, "**(ノಠ益ಠ)ノ  You sure this is a valid catagory/subreddit ??**", time=20
         )
     for i, (m, t) in enumerate(zip(media_url, title), start=1):
         if "https://i.imgur.com" in m and m.endswith(".gifv"):
@@ -289,7 +285,7 @@ async def pussy(event):
             media_url = redlink(m)
         pwnlist.append(f"<b><i>{i}. <a href = {media_url}>{t}</a></b>")
     string = f"<b>{count} results for {sub_r} :</b>\n\n"
-    await message_splitter(pwnlist, string, event)
+    await message_splitter(pwnlist, string, catevent)
 
 
 @catub.cat_cmd(
@@ -323,10 +319,10 @@ async def cat(event):
                 xtext, xcount, page = intxt.split(";")
             except ValueError:
                 xtext, xcount = intxt.split(";")
-
-    if await age_verification(event, reply_to):
+    catevent = await edit_or_reply(event, "**Just hold a min you horny kid...**")
+    if await age_verification(catevent, reply_to):
         return
-    flag = await useless.importent(event)
+    flag = await useless.importent(catevent)
     if flag:
         return
     page = requests.get(f"https://www.xvideos.com/?k={xtext}&p={int(page)}")
@@ -334,9 +330,9 @@ async def cat(event):
     col = soup.findAll("div", {"class": "thumb"})
     if not col:
         return await edit_delete(
-            event, "`No links found for that query , try differnt search...`", 60
+            catevent, "`No links found for that query , try differnt search...`", 60
         )
-    await edit_or_reply(event, "**Just hold a min you horny kid...**")
+    
     listlink = []
     listname = []
     pwnlist = []
@@ -348,7 +344,7 @@ async def cat(event):
         name = tmplink.split("/")[2]
         listname.append(name)
     await edit_or_reply(
-        event,
+        catevent,
         f"**{len(listlink)} results found for {xtext} :\nSending {xcount if xcount else 'All'} results out of them.**",
     )
 
@@ -364,7 +360,7 @@ async def cat(event):
         )
 
     string = f"<b>Showing {xcount}/{len(listlink)} results for {xtext}.</b>\n\n"
-    await message_splitter(pwnlist, string, event)
+    await message_splitter(pwnlist, string, catevent)
 
 
 @catub.cat_cmd(
@@ -390,10 +386,10 @@ async def wants_ur_noods(event):  # sourcery skip: low-code-quality
         )
     extractor = URLExtract()
     plink = extractor.find_urls(intxt)
-    await edit_or_reply(event, "** Just hold a sec u horny kid...**")
-    if await age_verification(event, reply_to):
+    catevent = await edit_or_reply(event, "** Just hold a sec u horny kid...**")
+    if await age_verification(catevent, reply_to):
         return
-    flag = await useless.importent(event)
+    flag = await useless.importent(catevent)
     if flag:
         return
     i = 0
@@ -409,7 +405,7 @@ async def wants_ur_noods(event):  # sourcery skip: low-code-quality
                 for a in soups.find_all("a", href=True):
                     m = a["href"]
             await edit_or_reply(
-                event,
+                catevent,
                 "**Just hold your candel & sit tight, It will take some time...**",
             )
             if not os.path.isdir("./temp"):
@@ -431,7 +427,7 @@ async def wants_ur_noods(event):  # sourcery skip: low-code-quality
                 if os.path.exists(media_url):
                     os.remove(media_url)
             await edit_or_reply(
-                event, f"**Download Started.\n\nFile Downloaded :  {i+1}/{len(plink)}**"
+                catevent, f"**Download Started.\n\nFile Downloaded :  {i+1}/{len(plink)}**"
             )
             await asyncio.sleep(2)
         except (WebpageCurlFailedError, ValueError):
@@ -440,4 +436,4 @@ async def wants_ur_noods(event):  # sourcery skip: low-code-quality
             )
         i += 1
         if i == len(plink):
-            await event.delete()
+            await catevent.delete()

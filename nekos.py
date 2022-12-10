@@ -82,7 +82,6 @@ async def dva(event):
         )
     if not url:
         return await edit_delete(event, "`uuuf.. No URL found from the API`")
-    await event.delete()
     await event.client.send_file(event.chat_id, file=url, reply_to=reply_to)
 
 
@@ -107,7 +106,6 @@ async def avatarlewd(event):
         f.write(requests.get(useless.nekos(target)).content)
     img = Image.open("temp.png")
     img.save("temp.webp", "webp")
-    await event.delete()
     await event.client.send_file(
         event.chat_id, file=open("temp.webp", "rb"), reply_to=reply_to
     )
@@ -133,7 +131,6 @@ async def lewdn(event):
     url = useless.nekos("neko")
     if not url:
         return await edit_delete(event, "`Uff.. No NEKO found from the API`")
-    await event.delete()
     await event.client.send_file(event.chat_id, file=url, reply_to=reply_to)
 
 
@@ -158,7 +155,6 @@ async def gasm(event):
         f.write(requests.get(useless.nekos(target)).content)
     img = Image.open("temp.png")
     img.save("temp.webp", "webp")
-    await event.delete()
     await event.client.send_file(
         event.chat_id, file=open("temp.webp", "rb"), reply_to=reply_to
     )
@@ -181,7 +177,6 @@ async def waifu(event):
         f.write(requests.get(useless.nekos(target)).content)
     img = Image.open("temp.png")
     img.save("temp.webp", "webp")
-    await event.delete()
     await event.client.send_file(
         event.chat_id, file=open("temp.webp", "rb"), reply_to=reply_to
     )
