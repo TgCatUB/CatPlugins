@@ -112,7 +112,7 @@ async def very(event):  # sourcery skip: low-code-quality
         except KeyError:
             return await edit_delete(
                 event,
-                "**(ノಠ益ಠ)ノ  Tou sure this a vaid catagory/subreddit ??**",
+                "**(ノಠ益ಠ)ノ  You sure this is a valid catagory/subreddit ??**",
                 time=20,
             )
         if "https://i.imgur.com" in media_url and media_url.endswith(".gifv"):
@@ -162,7 +162,7 @@ async def very(event):  # sourcery skip: low-code-quality
         "options": horny,
     },
 )
-async def bad(event):  # sourcery skip: low-code-quality
+async def bad(event):
     """Download porn in bulk"""
     count = 3
     sub_r = random.choice(useless.pawn)
@@ -196,7 +196,7 @@ async def bad(event):  # sourcery skip: low-code-quality
         media_url.extend(x["url"] for x in r["memes"])
     except KeyError:
         return await edit_delete(
-            event, "**(ノಠ益ಠ)ノ  Tou sure this a vaid catagory/subreddit ??**", time=20
+            event, "**(ノಠ益ಠ)ノ  You sure this is a valid catagory/subreddit ??**", time=20
         )
     for i, (m, p, t) in enumerate(zip(media_url, postlink, title), start=1):
         if "https://i.imgur.com" in m and m.endswith(".gifv"):
@@ -219,7 +219,7 @@ async def bad(event):  # sourcery skip: low-code-quality
                     os.remove(media_url)
             await edit_or_reply(
                 event,
-                f"**Bluk Download Started.\n\nCatagory :  `{sub_r}`\nFile Downloaded :  {i}/{count}**",
+                f"**Bulk Download Started.\n\nCatagory :  `{sub_r}`\nFile Downloaded :  {i}/{count}**",
             )
             await asyncio.sleep(2)
         except (WebpageCurlFailedError, ValueError):
@@ -276,7 +276,7 @@ async def pussy(event):
         media_url.extend(x["url"] for x in r["memes"])
     except KeyError:
         return await edit_delete(
-            event, "**(ノಠ益ಠ)ノ  Tou sure this a vaid catagory/subreddit ??**", time=20
+            event, "**(ノಠ益ಠ)ノ  You sure this is a valid catagory/subreddit ??**", time=20
         )
     for i, (m, t) in enumerate(zip(media_url, title), start=1):
         if "https://i.imgur.com" in m and m.endswith(".gifv"):
