@@ -196,7 +196,9 @@ async def bad(event):
         media_url.extend(x["url"] for x in r["memes"])
     except KeyError:
         return await edit_delete(
-            event, "**(ノಠ益ಠ)ノ  You sure this is a valid catagory/subreddit ??**", time=20
+            event,
+            "**(ノಠ益ಠ)ノ  You sure this is a valid catagory/subreddit ??**",
+            time=20,
         )
     for i, (m, p, t) in enumerate(zip(media_url, postlink, title), start=1):
         if "https://i.imgur.com" in m and m.endswith(".gifv"):
@@ -276,7 +278,9 @@ async def pussy(event):
         media_url.extend(x["url"] for x in r["memes"])
     except KeyError:
         return await edit_delete(
-            event, "**(ノಠ益ಠ)ノ  You sure this is a valid catagory/subreddit ??**", time=20
+            event,
+            "**(ノಠ益ಠ)ノ  You sure this is a valid catagory/subreddit ??**",
+            time=20,
         )
     for i, (m, t) in enumerate(zip(media_url, title), start=1):
         if "https://i.imgur.com" in m and m.endswith(".gifv"):
