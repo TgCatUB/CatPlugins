@@ -12,7 +12,7 @@ from userbot import catub
 from userbot.Config import Config
 from userbot.core.managers import edit_or_reply
 from userbot.helpers.utils import get_user_from_event, reply_id
-from userbot.plugins import ALIVE_NAME
+from userbot.plugins import ALIVE_NAME, mention
 
 plugin_category = "extra"
 
