@@ -196,7 +196,9 @@ async def bad(event):
         media_url.extend(x["url"] for x in r["memes"])
     except KeyError:
         return await edit_delete(
-            catevent, "**(ノಠ益ಠ)ノ  You sure this is a valid catagory/subreddit ??**", time=20
+            catevent,
+            "**(ノಠ益ಠ)ノ  You sure this is a valid catagory/subreddit ??**",
+            time=20,
         )
     for i, (m, p, t) in enumerate(zip(media_url, postlink, title), start=1):
         if "https://i.imgur.com" in m and m.endswith(".gifv"):
@@ -276,7 +278,9 @@ async def pussy(event):
         media_url.extend(x["url"] for x in r["memes"])
     except KeyError:
         return await edit_delete(
-            catevent, "**(ノಠ益ಠ)ノ  You sure this is a valid catagory/subreddit ??**", time=20
+            catevent,
+            "**(ノಠ益ಠ)ノ  You sure this is a valid catagory/subreddit ??**",
+            time=20,
         )
     for i, (m, t) in enumerate(zip(media_url, title), start=1):
         if "https://i.imgur.com" in m and m.endswith(".gifv"):
@@ -332,7 +336,7 @@ async def cat(event):
         return await edit_delete(
             catevent, "`No links found for that query , try differnt search...`", 60
         )
-    
+
     listlink = []
     listname = []
     pwnlist = []
@@ -427,7 +431,8 @@ async def wants_ur_noods(event):  # sourcery skip: low-code-quality
                 if os.path.exists(media_url):
                     os.remove(media_url)
             await edit_or_reply(
-                catevent, f"**Download Started.\n\nFile Downloaded :  {i+1}/{len(plink)}**"
+                catevent,
+                f"**Download Started.\n\nFile Downloaded :  {i+1}/{len(plink)}**",
             )
             await asyncio.sleep(2)
         except (WebpageCurlFailedError, ValueError):

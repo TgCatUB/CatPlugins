@@ -42,7 +42,7 @@ async def cat(event):
             if "Downloading" in media.raw_text:
                 media = await conv.get_response()
         except YouBlockedUserError:
-            await edit_or_reply(cat,"Please unblock @distortionerbot and try again")
+            await edit_or_reply(cat, "Please unblock @distortionerbot and try again")
             return
         await cat.delete()
         badcat = await event.client.send_file(event.chat_id, media, reply_to=reply)

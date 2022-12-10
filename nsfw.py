@@ -57,11 +57,14 @@ async def danbooru(event):
             response = response.json()
         else:
             return await edit_delete(
-                catevent, f"**An error occurred, response code: **`{response.status_code}`"
+                catevent,
+                f"**An error occurred, response code: **`{response.status_code}`",
             )
 
     if not response:
-        return await edit_delete(catevent, f"**No results for query:** __{search_query}__")
+        return await edit_delete(
+            catevent, f"**No results for query:** __{search_query}__"
+        )
     valid_urls = [
         response[0][url]
         for url in ["file_url", "large_file_url", "source"]
@@ -77,7 +80,9 @@ async def danbooru(event):
             return await catevent.delete()
         except Exception as e:
             await edit_or_reply(catevent, f"{e}")
-    await edit_delete(catevent, f"**Failed to fetch media for query:** __{search_query}__")
+    await edit_delete(
+        catevent, f"**Failed to fetch media for query:** __{search_query}__"
+    )
 
 
 @catub.cat_cmd(
