@@ -105,10 +105,7 @@ def nekos(endpoint=None, endpoints=endpoints):
                 checker = endpoints[i]["checker"]
         result = requests.get(api + endpoint).json()
         return result[checker]
-    return (
-        endpoints["v1"]["end"]
-        + endpoints["v2"]["end"]
-    )
+    return endpoints["v1"]["end"] + endpoints["v2"]["end"]
 
 
 async def importent(event):
