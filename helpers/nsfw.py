@@ -108,8 +108,6 @@ def nekos(endpoint=None, endpoints=endpoints):
     return (
         endpoints["v1"]["end"]
         + endpoints["v2"]["end"]
-        + endpoints["v3"]["end"]
-        + endpoints["v4"]["end"]
     )
 
 
