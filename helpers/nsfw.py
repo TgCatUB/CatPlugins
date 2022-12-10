@@ -94,40 +94,6 @@ endpoints = {
         "api": "https://nekos.life/api/v2/img/",
         "checker": "url",
     },
-    "v3": {
-        "end": [
-            "ass",
-            "bdsm",
-            "boobjob",
-            "creampie",
-            "cuckold",
-            "elves",
-            "ero",
-            "femdom",
-            "foot",
-            "gangbang",
-            "glasses",
-            "incest",
-            "manga",
-            "masturbation",
-            "nsfwMobileWallpaper",
-            "orgy",
-            "public",
-            "tentacles",
-            "thighs",
-            "uniform",
-            "vagina",
-            "yuri",
-            "zettaiRyouiki",
-        ],
-        "api": "https://hmtai.herokuapp.com/nsfw/",
-        "checker": "url",
-    },
-    "v4": {
-        "end": ["doujin", "gifs", "netorare", "maid", "panties", "school", "succubus"],
-        "api": "https://akaneko-api.herokuapp.com/api/",
-        "checker": "url",
-    },
 }
 
 
@@ -165,3 +131,43 @@ def nsfw(catagory):
 
 
 API = "https://catmemeapi2023.herokuapp.com/gimme"
+
+
+"""
+#Blame Heroku
+
+"v3": {
+    "end": [
+        "ass",
+        "bdsm",
+        "boobjob",
+        "creampie",
+        "cuckold",
+        "elves",
+        "ero",
+        "femdom",
+        "foot",
+        "gangbang",
+        "glasses",
+        "incest",
+        "manga",
+        "masturbation",
+        "nsfwMobileWallpaper",
+        "orgy",
+        "public",
+        "tentacles",
+        "thighs",
+        "uniform",
+        "vagina",
+        "yuri",
+        "zettaiRyouiki",
+    ],
+    "api": "https://hmtai.herokuapp.com/nsfw/",
+    "checker": "url",
+},
+"v4": {
+    "end": ["doujin", "gifs", "netorare", "maid", "panties", "school", "succubus"],
+    "api": "https://akaneko-api.herokuapp.com/api/",
+    "checker": "url",
+},
+"""
